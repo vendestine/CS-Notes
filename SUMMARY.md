@@ -5,5 +5,5 @@
 
 ## QT
 
-* [Page 4](qt/page-4.md)
-* [QT信号槽](qt/qt-xin-hao-cao.md)
+* [QT信号和槽](qt/qt-xin-hao-he-cao.md)
+* [QT Debug汇总](qt/qt-debug-hui-zong.md)
