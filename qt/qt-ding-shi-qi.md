@@ -1,6 +1,6 @@
 # QT定时器
 
-定时器的应用场景：一次/多次timeout后，执行一些动作；
+定时器的应用场景：<mark style="background-color:orange;">每次timeout后，执行一些动作；或者单次timeout后，执行一些动作</mark>；
 
 
 
@@ -30,6 +30,10 @@ QTimer定时器的默认精度是msec，我们也可以通过setTimerType函数�
 connect(timer对象，timeout信号，this，timeout后的操作）
 
 connect(RESET button, clikced信号，this，弹窗 + singleShot)
+
+其中最后一项参数，可以直接lambda表达式写，也可以封装成槽函数，然后实现这个槽函数；
+
+
 
 
 
