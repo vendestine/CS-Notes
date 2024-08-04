@@ -31,9 +31,7 @@ connect(timer对象，timeout信号，this，timeout后的操作）
 
 connect(RESET button, clikced信号，this，弹窗 + singleShot)
 
-其中最后一项参数，可以直接lambda表达式写，也可以封装成槽函数，然后实现这个槽函数；
-
-
+<mark style="background-color:orange;">其中最后一项参数，可以直接lambda表达式写，也可以封装成槽函数，然后实现这个槽函数</mark>；
 
 
 
@@ -41,7 +39,7 @@ connect(RESET button, clikced信号，this，弹窗 + singleShot)
 
 TimerWindow.h
 
-```
+```cpp
 #ifndef TIMERWINDOW_H
 #define TIMERWINDOW_H
 
@@ -75,7 +73,7 @@ private:
 
 TimerWindow.cpp
 
-```
+```cpp
 #include "timerwindow.h"
 #include "ui_timerwindow.h"
 #include <QTimer>

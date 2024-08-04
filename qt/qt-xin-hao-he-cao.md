@@ -2,17 +2,15 @@
 
 ## 入门：使用方法
 
-> 案例1，展示了QT种信号和槽的多种使用方法
-
 ### 案例1：实现一个简单计数器
+
+案例1，展示了QT种信号和槽的多种使用方法
 
 需求：有多个按钮，每个按钮点击一次，计数数值+1
 
 
 
-首先设计一个界面，counter界面，所以类取名counter，生成counter.h和counter.cpp，counter.ui文件；一般一个界面对应三个文件；我们ui文件里设计界面，C++文件里实现界面的逻辑和数据交互；
-
-
+思路：首先设计一个界面，counter界面，所以类取名counter，生成counter.h和counter.cpp，counter.ui文件；一般一个界面对应三个文件；我们ui文件里设计界面，C++文件里实现界面的逻辑和数据交互；
 
 现在我们需要实现按钮点击，计数值 + 1；这里可以直接使用QT的预定义信号clicked()，使用QT的信号槽，我们有很多种写法
 
@@ -22,7 +20,7 @@
 
 <div align="left">
 
-<figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption><p>声明槽函数</p></figcaption></figure>
 
 </div>
 
@@ -52,7 +50,7 @@ connect to C++11 lambda：clickedButton\_3
 
 <div align="left">
 
-<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption><p>Lambda表达式作为槽</p></figcaption></figure>
 
 </div>
 
@@ -64,17 +62,11 @@ connect to C++11 lambda：clickedButton\_3
 
 ## 进阶：原理和注意事项
 
-
-
 信号和槽的本质：<mark style="background-color:orange;">信号和槽的本质都是函数</mark>，我们可以使用QT预定义的信号函数和槽函数，也可也<mark style="background-color:orange;">自定义信号函数和槽函数</mark>；信号是公共访问的函数，在头文件中的signals关键字后声明，实现是由moc自动实现；而槽是成员函数，在头文件中的slots关键字后声明，需要自己实现，有类的访问限制；
-
-
 
 <figure><img src="../.gitbook/assets/image (7).png" alt=""><figcaption><p>signals官方解释</p></figcaption></figure>
 
 <figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption><p>slots官方解释</p></figcaption></figure>
-
-
 
 这里转载一张思维导图，对于QT信号和槽总结的还是挺全面的
 
@@ -82,21 +74,19 @@ connect to C++11 lambda：clickedButton\_3
 
 
 
-> 案例2，展示自定义信号和槽的使用场景，以及使用方式
-
 ### 案例2：实现一个进阶计数器
+
+案例2，展示自定义信号和槽的使用场景，以及使用方式
 
 需求：有三个按钮，add按钮点击，计数 + 1，sub按钮点击，计数 -1，reset按钮点击，计数复位；如果计数 = 10，需要弹窗通知；
 
-
-
-按钮点击，我们可以使用预定义信号clicked()，计数 = 10，弹窗通知，我们可以自定义弹窗信号，然后再实现对应的槽；
+思路：按钮点击，我们可以使用预定义信号clicked()，计数 = 10，弹窗通知，我们可以自定义弹窗信号，然后再实现对应的槽；
 
 
 
 counter.h
 
-```
+```cpp
 #ifndef COUNTER_H
 #define COUNTER_H
 
@@ -135,7 +125,7 @@ private:
 
 counter.cpp
 
-```
+```cpp
 #include "counter.h"
 #include "ui_counter.h"
 #include <QMessageBox>
@@ -197,7 +187,7 @@ void counter::onPopWindow(int num)
 
 main.cpp
 
-```
+```cpp
 #include "counter.h"
 
 #include <QApplication>
@@ -214,11 +204,7 @@ int main(int argc, char *argv[])
 
 
 
-界面：
-
-<figure><img src="../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
-
-案例演示：
+demo：
 
 <div align="left">
 
