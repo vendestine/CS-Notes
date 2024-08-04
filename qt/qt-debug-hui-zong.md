@@ -1,6 +1,6 @@
 # QT Debug汇总
 
-### **QMetaObject::connectSlotsByName: No matching signal for on\_clickedButton\_clicked()**
+#### **QMetaObject::connectSlotsByName: No matching signal for on\_clickedButton\_clicked()**
 
 报错的原因：有`on_<objectName>_<signalName>`形式的函数并且找不到对象名为objectName的对象
 
