@@ -144,7 +144,7 @@ demo:
 
 <div align="left">
 
-<figure><img src="../.gitbook/assets/1-ezgif.com-optimize.gif" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/1-ezgif.com-optimize.gif" alt=""><figcaption></figcaption></figure>
 
 </div>
 
