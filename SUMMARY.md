@@ -9,5 +9,6 @@
   * [C++ 开发环境 - Visual Studio](c++/c++-kai-fa-huan-jing-visual-studio.md)
   * [C++ new delete](c++/c++-new-delete.md)
   * [namespace 命名空间](c++/namespace-ming-ming-kong-jian.md)
+  * [C++ const](c++/c++-const.md)
   * [C++的标准输入输出](c++/c++-de-biao-zhun-shu-ru-shu-chu.md)
   * [内存泄露检测工具](c++/nei-cun-xie-lou-jian-ce-gong-ju.md)
