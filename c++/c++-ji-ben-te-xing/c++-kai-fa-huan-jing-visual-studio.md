@@ -15,7 +15,7 @@
 
 这里演示一下VS中，如何查看和更改链接库；
 
-<figure><img src="../.gitbook/assets/媒体1 (3).gif" alt=""><figcaption><p>visual studio 2019</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/媒体1 (3).gif" alt=""><figcaption><p>visual studio 2019</p></figcaption></figure>
 
 VS的解决方案下可以包含多个项目，vs是以文件组成的项目为最小编译单元的。也就是说vs无法单独编译一个源文件
 

@@ -6,17 +6,17 @@ C++经常需要多个团队合作来完成大型项目。多个团队就常常�
 
 问题演示：TeamA和TeamB是两个团队，TeamA有代码文件，TeamA.h TeamA.cpp; TeamB有代码文件 TeamB.h TeamB.cpp; 两个团队都定义了test函数，然后main.cpp中引入了这两个团队的头文件；这样在main.cpp中调用test()就会报错；
 
-<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 <div align="left">
 
-<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
 <div align="left">
 
-<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -24,11 +24,11 @@ C++经常需要多个团队合作来完成大型项目。多个团队就常常�
 
 解决方法：每个团队使用各自的命名空间，例如TeamA团队就使用namespace A，而TeamB团队就使用namespace B；然后把团队自己的头文件和源文件都使用namespace包裹住；
 
-<figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 <div align="left">
 
-<figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -44,9 +44,9 @@ using 命名空间::变量名；这样以后使用此变量时只要使用变量
 
 注意：如果<mark style="background-color:orange;">变量前本来就有命名空间，那么直接使用当前的命名空间</mark>；否则就会使用using里的命名空间；<mark style="background-color:orange;">如果有多个using针对的是相同的变量名，还是会因为无法确定报错；</mark>
 
-<figure><img src="../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
 using namspce 命名空间。这样每一个变量都会在该命名空间中寻找
 
@@ -54,13 +54,13 @@ using namspce 命名空间。这样每一个变量都会在该命名空间中寻
 
 <div align="left">
 
-<figure><img src="../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
 <div align="left">
 
-<figure><img src="../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 

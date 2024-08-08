@@ -23,7 +23,7 @@ VLD，一款比较好的内存泄露检测工具
 
 步骤演示：
 
-<figure><img src="../.gitbook/assets/媒体1898.gif" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/媒体1898.gif" alt=""><figcaption></figcaption></figure>
 
 
 
