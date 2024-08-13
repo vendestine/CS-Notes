@@ -6,7 +6,7 @@ C++经常需要多个团队合作来完成大型项目。多个团队就常常�
 
 问题演示：TeamA和TeamB是两个团队，TeamA有代码文件，TeamA.h TeamA.cpp; TeamB有代码文件 TeamB.h TeamB.cpp; 两个团队都定义了test函数，然后main.cpp中引入了这两个团队的头文件；这样在main.cpp中调用test()就会报错；
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 <div align="left">
 
