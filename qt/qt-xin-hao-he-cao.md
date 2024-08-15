@@ -38,7 +38,7 @@ Qt5使用函数指针：clickedButton\_2
 
 <div align="left">
 
-<figure><img src="../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption><p>QT4/QT5 connect不同写法</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption><p>QT4/QT5 connect不同写法</p></figcaption></figure>
 
 </div>
 
