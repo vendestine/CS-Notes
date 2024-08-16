@@ -2,6 +2,10 @@
 
 * [博客导航](README.md)
 * [QT](qt/README.md)
+  * [QT开发环境](qt/qt-kai-fa-huan-jing/README.md)
+    * [QT Creator](qt/qt-kai-fa-huan-jing/qt-creator.md)
+  * [QT qmake pro文件](qt/qt-qmake-pro-wen-jian.md)
+  * [QT ui文件和ui类详解](qt/qt-ui-wen-jian-he-ui-lei-xiang-jie.md)
   * [QT信号和槽](qt/qt-xin-hao-he-cao.md)
   * [QT定时器](qt/qt-ding-shi-qi.md)
   * [QT Debug汇总](qt/qt-debug-hui-zong.md)

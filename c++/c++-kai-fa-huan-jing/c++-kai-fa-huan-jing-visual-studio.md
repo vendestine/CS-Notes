@@ -35,7 +35,7 @@ vs项目调试方法：
 
 一个正常的VS项目目录结构如下
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
 我把每一个文件都通过记事本打开看了一遍，总结了这些文件的作用
 
@@ -59,7 +59,7 @@ x64文件                 存储64位平台下的编译文件，里面还有Debu
 
 一个正常的VS解决方案的目录结构如下
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 解决方案的配置文件
