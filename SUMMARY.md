@@ -18,6 +18,7 @@
     * [QSet](qt/qt-rong-qi-lei/qset.md)
   * [QT XML读写](qt/qt-xml-du-xie.md)
   * [QT JSON读写](qt/qt-json-du-xie.md)
+  * [QT Http请求](qt/qt-http-qing-qiu.md)
   * [QT Debug汇总](qt/qt-debug-hui-zong.md)
 * [C++](c++/README.md)
   * [C++ 开发环境](c++/c++-kai-fa-huan-jing/README.md)
