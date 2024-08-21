@@ -60,4 +60,6 @@
   * [QT Http请求](qt/qt-http-qing-qiu.md)
   * [QT QThread多线程](qt/qt-qthread-duo-xian-cheng.md)
   * [QT QMutex线程锁](qt/qt-qmutex-xian-cheng-suo.md)
+  * [QT 自定义控件](qt/qt-zi-ding-yi-kong-jian/README.md)
+    * [QT 自定义控件-倒计时控件](qt/qt-zi-ding-yi-kong-jian/qt-zi-ding-yi-kong-jian-dao-ji-shi-kong-jian.md)
   * [QT Debug汇总](qt/qt-debug-hui-zong.md)

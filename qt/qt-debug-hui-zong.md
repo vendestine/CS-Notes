@@ -1,6 +1,6 @@
 # QT Debug汇总
 
-#### **QMetaObject::connectSlotsByName: No matching signal for on\_clickedButton\_clicked()**
+### **QMetaObject::connectSlotsByName: No matching signal for on\_clickedButton\_clicked()**
 
 报错的原因：有`on_<objectName>_<signalName>`形式的函数并且找不到对象名为objectName的对象
 
@@ -15,9 +15,7 @@ Reference：
 
 
 
+## Qt直接运行生成的exe文件提示“缺少Qt5Core.dll”的解决办法 <a href="#articlecontentid" id="articlecontentid"></a>
 
-
-
-
-###
+[https://blog.csdn.net/liubing8609/article/details/87474900](https://blog.csdn.net/liubing8609/article/details/87474900)
 
