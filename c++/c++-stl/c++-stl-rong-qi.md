@@ -128,3 +128,258 @@ unordered\_set/unorder\_multiset：同样使用“哈希表”实现的。自然
 
 
 我们发现，对于普通元素，容器的选择不怎么容易判断。 其实在真正的大型项目中，要对各种容器进行测试的，普通练习一般选择vector或set 就可以了。这两个使用是比较频繁的
+
+
+
+
+
+STL常用容器和基本操作
+
+```cpp
+// vector.c
+#include <iostream>
+#include <vector>
+#include <set>
+#include <deque>
+#include <algorithm>
+
+
+int main()
+{
+#if 0  // 随机访问最好使用at，而不是[]，因为在发生越界时，[]越界直接assert报错，而at越界是抛出异常，可以使用try catch捕获异常
+    std::vector<int> ivec{ 1, 2, 3, 4, 5 };
+    // 随机访问 不越界
+    std::cout << ivec[1] << std::endl;
+    std::cout << ivec.at(1) << std::endl;
+
+    // 随机访问 越界 推荐使用at，可以抛出异常，而不是报错
+    try {
+        //std::cout << ivec[10] << std::endl;
+        std::cout << ivec.at(10);
+    }
+    catch (const std::out_of_range& except) {
+        std::cout << except.what() << std::endl;
+
+    }
+#endif
+
+#if 0  // 数组尾部添加或删除元素非常迅速。但在中部或头部就比较费时
+    std::vector<int> ivec{ 1, 2, 3, 4 ,5 };
+    // 尾部增删快
+    ivec.push_back(1);
+    ivec.pop_back();
+
+    // 头部和中间增删慢
+    ivec.insert(++ivec.begin(), 10);
+#endif
+
+#if 0  // vector构造函数在VS中的快速查看技巧，直接在括号中加入()
+    std::vector<int> ivec(())
+#endif
+
+
+#if 0  // vector使用迭代器初始化，可以使用其他容器的迭代器，例如：deque，set，list等 
+    std::vector<int> ivec{ 1, 2, 3, 4, 5 };
+    std::deque<int> ideque{ 1, 2, 3, 4, 5 };
+    std::set<int> iset{ 1, 2, 3, 4, 5 };
+
+    std::vector<int> ivec2(ideque.cbegin(), ideque.cend());
+    for (int elem : ivec2) {
+        std::cout << elem << std::endl;
+    }
+
+    std::cout << "====================" << std::endl;
+
+    std::vector<int> ivec3(iset.cbegin(), iset.cend());
+    for (int elem : ivec3) {
+        std::cout << elem << std::endl;
+    }
+#endif
+
+#if 0  // vector常用构造函数，vector(size_t count)，vector(size_t count, int val);
+    //std::vector<int> ivec(10);
+    std::vector<int> ivec(10, 2);
+    for (int elem : ivec) {
+        std::cout << elem << std::endl;
+    }
+#endif
+
+
+#if 0  // vector增加函数，push_back(), insert()
+    std::vector<int> ivec(10, 5);
+    //ivec.push_back(20);
+    //ivec.push_back(std::move(50));
+
+    // insert返回值为指向新添加的第一个元素的迭代器
+    //auto iter = ivec.insert(++ivec.cbegin(), 100);                 // 添加一个值
+    //auto iter = ivec.insert(++ivec.begin(), { 1, 2, 3, 4, 5 });    // 添加一个初始化列表
+    auto iter = ivec.insert(++ivec.begin(), 3, 40);                 // 添加count个value
+    std::cout << std::distance(ivec.begin(), iter) << std::endl;
+
+    for (int elem : ivec) {
+        std::cout << elem << std::endl;
+    }
+#endif
+
+#if 0  // vector删除函数，erase(), pop_back(), clear()
+    std::vector<int> ivec{ 1, 2, 3, 4, 5, 6, 7, 8};
+    // 返回指向被删除元素后面的那个元素的迭代器
+    //auto iter = ivec.erase(ivec.begin());                   // 删除一个元素
+    auto iter = ivec.erase(ivec.begin(), ivec.begin() + 3);   // 删除一段元素，注意左闭右开
+    std::cout << *iter << std::endl;
+    ivec.pop_back();
+    ivec.clear();
+    
+    std::cout << "=================" << std::endl;
+    
+    
+
+    for (int elem : ivec) {
+        std::cout << elem << std::endl;
+    }
+#endif
+
+#if 0  // vector遍历函数
+    std::vector<int> ivec{ 1, 2, 3, 4, 5, 6, 7, 8 };
+    // 注意这里返回的都是元素的引用
+    //int& i = ivec.front();
+    //i = 10;
+
+    //int& i2 = ivec.back();
+    //i2 = 20;
+
+    //int& i3 = ivec.at(1);
+    //i3 = 11;
+
+    //int& i4 = ivec[2];
+    //i4 = 12;
+
+
+    //for (int elem : ivec) {
+    //    std::cout << elem << std::endl;
+    //}
+
+    // 使用反向常量迭代器
+    for (auto iter = ivec.crbegin(); iter != ivec.crend(); ++iter) {
+        std::cout << *iter << std::endl;
+    }
+#endif
+
+#if 0
+    std::vector<int> ivec{ 1, 2, 3, 4, 5, 6, 7, 8 };
+    std::cout << ivec.empty() << std::endl;
+    std::cout << ivec.size() << std::endl;          // 返回当前容器中元素的个数
+    std::cout << ivec.capacity() << std::endl;      // 返回当前容器不扩张所能容纳的最大元素数量
+    std::cout << ivec.max_size() << std::endl;      // 返回当前机器可以存储的元素数量最大值
+#endif
+
+
+#if 0
+    std::vector<int> ivec{ 1, 2, 3, 4, 5, 6, 7, 8 };
+    std::vector<int> ivec2{ 1, 2, 3, 4, 5 };
+    ivec.swap(ivec2);
+    for (auto elem : ivec) {
+        std::cout << elem << " ";
+    }
+    std::cout << std::endl;
+
+    ivec.assign({ 1, 2, 3 });
+    for (auto elem : ivec) {
+        std::cout << elem << " ";
+    }
+    std::cout << std::endl;
+
+    ivec.assign(5, 1);
+    for (auto elem : ivec) {
+        std::cout << elem << " ";
+    }
+    std::cout << std::endl;
+
+    ivec.assign(ivec2.begin(), ivec2.end());
+    for (auto elem : ivec) {
+        std::cout << elem << " ";
+    }
+    std::cout << std::endl;
+
+    ivec.resize(20);
+    for (auto elem : ivec) {
+        std::cout << elem << " ";
+    }
+    std::cout << std::endl;
+
+    ivec.resize(3);
+    for (auto elem : ivec) {
+        std::cout << elem << " ";
+    }
+#endif
+
+    return 0;
+}
+
+
+// deque.c
+#include <iostream>
+#include <deque>
+
+
+int main()
+{
+    std::deque<int> ideque{ 1, 2, 3, 4 };
+    ideque.push_front(0);
+    ideque.push_back(5);
+
+    for (auto elem : ideque) {
+        std::cout << elem << std::endl;
+    }
+    return 0;
+}
+
+
+
+// list.c
+#include <iostream>
+#include <list>
+
+int main()
+{
+    std::list<int> iList{ 1, 2, 3, 4, 5 };
+    iList.push_back(6);
+    iList.push_front(0);
+    iList.insert(++iList.begin(), 10);
+    
+    for (auto elem : iList) {
+        std::cout << elem << std::endl;
+    }
+    
+    return 0;
+}
+
+
+// forward_list.c
+#include <iostream>
+#include <forward_list>
+
+int main()
+{
+    std::forward_list<int> forList{ 1, 2, 3, 4, 5 };
+    auto iter = forList.begin();
+    ++iter;
+    //--iter; // 迭代器不允许向后
+    return 0;
+}
+
+
+// string.c
+#include <iostream>
+#include <string>
+
+int main()
+{
+    const char* str1 = "hello world";
+    std::string str2("hello world");
+
+    std::cout << str2.c_str() << std::endl;
+    std::cout << str2.data() << std::endl;
+    return 0;
+}
+```
