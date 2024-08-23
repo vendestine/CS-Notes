@@ -70,4 +70,5 @@
     * [QT 自定义控件-倒计时控件](qt/qt-zi-ding-yi-kong-jian/qt-zi-ding-yi-kong-jian-dao-ji-shi-kong-jian.md)
   * [QT Debug汇总](qt/qt-debug-hui-zong.md)
 * [网络编程](wang-luo-bian-cheng/README.md)
-  * [CS模型](wang-luo-bian-cheng/cs-mo-xing.md)
+  * [Windows网络编程](wang-luo-bian-cheng/windows-wang-luo-bian-cheng/README.md)
+    * [CS模型](wang-luo-bian-cheng/windows-wang-luo-bian-cheng/cs-mo-xing.md)
