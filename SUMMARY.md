@@ -72,3 +72,5 @@
 * [网络编程](wang-luo-bian-cheng/README.md)
   * [Windows网络编程](wang-luo-bian-cheng/windows-wang-luo-bian-cheng/README.md)
     * [CS模型](wang-luo-bian-cheng/windows-wang-luo-bian-cheng/cs-mo-xing.md)
+    * [select网络模型](wang-luo-bian-cheng/windows-wang-luo-bian-cheng/select-wang-luo-mo-xing.md)
+    * [select模型的逐步优化](wang-luo-bian-cheng/windows-wang-luo-bian-cheng/select-mo-xing-de-zhu-bu-you-hua.md)
