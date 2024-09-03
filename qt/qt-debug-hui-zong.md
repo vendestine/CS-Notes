@@ -63,4 +63,18 @@ Reference:
 
 [https://cloud.tencent.com/developer/article/1614353](https://cloud.tencent.com/developer/article/1614353)    &#x20;
 
-[https://www.cnblogs.com/lcgbk/p/13281138.html](https://www.cnblogs.com/lcgbk/p/13281138.html)&#x20;
+[https://www.cnblogs.com/lcgbk/p/13281138.html](https://www.cnblogs.com/lcgbk/p/13281138.html)         &#x20;
+
+
+
+### qt QObject::connect: Parentheses expected <a href="#articlecontentid" id="articlecontentid"></a>
+
+原因：connect时槽函数忘记加()
+
+解决：加上()即可
+
+
+
+Reference：
+
+[https://blog.csdn.net/lxj362343/article/details/106998445](https://blog.csdn.net/lxj362343/article/details/106998445)
