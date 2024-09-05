@@ -16,7 +16,7 @@ QT Creator不在QT目录的对应QT版本目录里，而是在Tools目录下；
 
 QT Creator功能介绍：
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 左侧栏：
 
