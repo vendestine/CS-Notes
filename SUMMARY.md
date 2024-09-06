@@ -54,6 +54,8 @@
     * [线程的创建](c++/c++-duo-xian-cheng/xian-cheng-de-chuang-jian.md)
     * [传递线程参数](c++/c++-duo-xian-cheng/chuan-di-xian-cheng-can-shu.md)
     * [线程id](c++/c++-duo-xian-cheng/xian-cheng-id.md)
+    * [数据共享与数据保护](c++/c++-duo-xian-cheng/shu-ju-gong-xiang-yu-shu-ju-bao-hu.md)
+    * [死锁](c++/c++-duo-xian-cheng/si-suo.md)
   * [C++ Debug](c++/c++-debug.md)
 * [QT](qt/README.md)
   * [QT开发环境](qt/qt-kai-fa-huan-jing/README.md)
