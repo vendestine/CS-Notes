@@ -797,48 +797,112 @@ void WindowWidget::onRulerStrechDone(float value)
 
 
 
+(10) 追加功能：我们发现以上的代码，rulerheader在move的时候，timelabel中的时间没有实时发生变化，所以我们现在想要rulerheader移动的时候，timellabel中的时间实时发生变化
+
+
+
+首先分析一下就是 rulerheader移动的时候，strechruler传递尺子比率给timelabel控件，因为timelabel是自带控件，所以实际上是传递给timelabel的父控件window widget；
+
+rulerheader移动的时候，strechruler传递尺子比率给window widget控件；使用信号槽，strechruler中对应的槽函数中发出信号传递尺子比率，然后window widget里实现对应的槽函数，window widget中connect；（其实该信号在之前的代码中已经写过了)
+
+```cpp
+// strechruler  发出信号的位置
+void StrechRuler::onRulerHeaderMove(int aValue)
+{
+    float dialRatio = pRulerHeader->pos().y() / 486.0;
+    emit rulerStrechSignal(dialRatio);
+}
+
+// window widget 接收信号的控件 实现槽函数
+class WindowWidget : public QWidget
+{
+    void setupLabelTime(float value);
+}
+
+void WindowWidget::setupLabelTime(float value)
+{
+    int mSeconds = (int)3600 * value;
+    QString formatTime = calculateFormatTimeWithSeconds(mSeconds);
+    pTimeLabel->setText(formatTime);
+}
+
+void WindowWidget::loadFrontWidgets() {
+    connect(pStrechRuler, SIGNAL(rulerStrechSignal(float)), this, SLOT(setupLabelTime(float)));
+}
+```
+
+
+
+
+
 ## 总结
 
 其实这个自定义控件的案例还是比较复杂的，大量的运用了控件之间的通信；ui部分个人感觉难度不大，这里主要总结一下控件之间通信
 
 
 
-控件之间的通信，可以总结为以下三种，我们能看出不是所有的控件之间的通信我们都要使用信号槽
+自定义控件之间的通信：
+
+可以总结为以下几种，我们能看出不是所有的控件之间的通信我们都要使用信号槽
 
 1.  子控件传递信息给父控件，子控件通知父控件，使用信号槽；
 
-    具体来说，此时槽函数定义在接收信号的父控件中，修饰为private，然后父控件中connect信号和槽
+    具体来说，子控件中发射信号，接收信号的父控件中定义private槽函数，然后父控件中connect信号和槽
 2.  互相独立的子控件之间通信，使用信号槽；
 
-    具体来说，我们先找到这两个子控件的公共父控件，然后槽函数定义在接收信号的子控件中，修饰为public，然后父控件中connect信号和槽（如果子空间的槽函数不修饰为public，无法在父控件中访问到，自然也就不能connect了）
+    具体来说，我们先找到这两个子控件的公共父控件，然后其中一个子控件发射信号，接收信号的子控件定义public槽函数，最后父控件中connect信号和槽（如果子控件的槽函数不修饰为public，无法在父控件中访问到，自然也就不能connect了）
 3.  父控件传递信息给子控件，父控件通知子控件，此时不需要使用信号槽
 
-    具体来说，子控件的处理函数直接修饰为public，然后我们就可以直接在父控件中调用子控件的public函数了
-4. QT中一些控件自定义了一些信号，此时直接在控件所在的父控件中实现槽函数；
+    具体来说，子控件直接定义public的处理函数，然后我们直接在父控件中调用子控件的public函数
 
 
+
+QT自带控件的通信
+
+1.  QT中自带了一些控件，这些控件里自带了一些信号
+
+    具体来说，信号是发给该控件的父控件，所以直接在该控件所在的父控件中实现槽函数；
+2.  控件传递信息给自带控件，控件通知自带控件；使用信号槽
+
+    具体来说，此时实际上是控件传递信息给自带控件的父控件，控件通知自带控件的父控件；此时控件发出信号，自带控件的父控件中定义private槽函数，然后父控件中connect信号和槽
+
+
+
+这里总结一下我对于信号槽实现控件之间通信的一个通用描述：
+
+xxxx场景，A控件 传递信息/通知 B控件；使用信号槽；A控件在哪里发射信号（传递信息），然后B控件里实现对应的槽函数（实现功能），哪里connect
+
+
+
+拿该案例说明一下
 
 rulerheader鼠标上下拖动：
 
-本质就是rulerheader要在它的父控件里拖动，所以rulerheader需要传递鼠标偏移量给父控件；同时鼠标停下时，rulerheader需要通知父控件记录rulerheader的位置；使用信号槽，rulerheader中的mouseEvent里发出信号，然后strechruler里实现槽函数，strechruler中connect
+本质就是rulerheader要在它的父控件里拖动
+
+鼠标拖动时，rulerheader传递鼠标偏移量给父控件strechruler；使用信号槽；rulerheader在mouseMoveEvent函数里发射信号传递鼠标偏移量，strechruler中实现对应的槽函数（计算移动后的位置），父控件strechruler中connect；
+
+鼠标停下时，rulerheader通知父控件strechruler；使用信号槽；rulerheader在mouseReleaseEvent函数里发出信号，strechruler中实现对应的槽函数（记录rulerheader的位置）父控件strechruler中connect
 
 
 
 rulerheader上下拖动时，表盘控件中的指针也转动：
 
-本质就是rulerheader拖动时，传递strechruler的尺子比率给表盘控件；rulerheader拖动时strechruler的所有操作已经封装在了对应的槽函数中；所以在strechruler对应的槽函数中，我们传递尺子比率给表盘控件；使用信号槽，strechruler的对应rulerheader move时的槽函数中发出信号，然后表盘控件中实现槽函数，window widget中connect
+rulerheader拖动时，strechruler传递尺子比率给表盘控件；使用信号槽；strechruler在槽函数rulerheader move中发出信号传递尺子比率，然后表盘控件中实现槽函数（转动表盘），window widget中connect
 
 
 
 rulerheader上下拖动时，timelabel设置对应时间
 
-本质就是rulerheader拖动时，传递strechruler的尺子比率给timelabl（自带控件的父控件）；所以在strechruler对应的槽函数中，我们传递尺子比率给window widget；使用信号槽，strechruler中对应的槽函数中发出信号，然后timelabel的父控件里实现对应的槽函数，window widget中connect
+rulerheader拖动时，strechruler传递尺子比率给timelabl（实际是传给timelabel的父控件window widget）；使用信号槽；strechruler在对应的槽函数中发出信号传递尺子比率；然后window widget里实现对应的槽函数（设置时间），window widget中connect
 
 
 
 start按钮选中定时器开启，取消选中定时器关闭，reset按钮点击后所有控件复位
 
-按钮选中，取消选中，点击都是QT自带的信号，所以直接在按钮所在window widget里实现对应的槽函数即可；
+按钮直接使用QT自带的控件；
+
+按钮选中，取消选中，点击都是QT自带的信号，所以直接在按钮的父控件window widget里实现对应的槽函数即可；
 
 
 
