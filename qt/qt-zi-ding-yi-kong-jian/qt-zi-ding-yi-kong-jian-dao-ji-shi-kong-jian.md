@@ -304,4 +304,157 @@ void StrechRuler::onRulerHeaderMoveDone()
 
 
 
-(4) strechruler随着rulerheader移动，绘制对应长度的尺子
+(4) 鼠标按住rulerheader控件拖动的时候，strechruler控件实时绘制对应的尺子
+
+简单来说，我们想要实现的效果是，拖动rulerheader的时候有对应的尺子拉长缩短；
+
+这个尺子其实是strechruler的一部分，我们重写paintEvent去绘制这个尺子；paintEvent函数里，我们使用QPainter去绘制；
+
+首先绘制尺子的轮廓使用drawRect，设置边框颜色使用setPen，设置尺子内部的颜色使用setBrush；
+
+之后就是绘制尺上的刻度线，刻度线分为两种短线和长线，所以使用drawLine去绘制刻度线；然后使用setPen设置度线的颜色；绘制刻度线的逻辑很简单，先计算当前短线和长线所需要绘制的个数，然后就是循环里逐个绘制；
+
+rulerheader拖动时，strechruler的尺子就会改变（意味着重新绘制），所以我们要在onRulerHeaderMove槽函数里最后加上repaint()；此时鼠标按住rulerheader控件拖动的时候，strechruler就会实时绘制出对应的尺子；
+
+```cpp
+// strechruler
+class StrechRuler : public QWidget
+{
+protected:
+    void paintEvent(QPaintEvent* event);
+};
+
+void StrechRuler::paintEvent(QPaintEvent* event)
+{
+    Q_UNUSED(event);
+
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing, true);  // 反锯齿
+    
+    // 绘制尺子
+    painter.save();
+    painter.setPen(QPen(QColor(127, 159, 124),1));   // 绘制尺子边框的颜色
+    painter.setBrush(QColor(127, 159, 124));         // 填充尺子内部的颜色
+    painter.drawRect(15, 3, 52, pRulerHeader->pos().y());   // 绘制尺子轮廓
+    painter.restore();
+
+    // 绘制尺子上的刻度线
+    int sScale = 5;      // 短线间距
+    int lScale = 25;     // 长线间距
+    int currentRulerHeight = pRulerHeader->pos().y();   // 当前rulerhader的y值
+
+    int sScale_count = currentRulerHeight / sScale + 1;   // 短线个数
+    int lScale_count = currentRulerHeight / lScale + 1;   // 长线个数
+
+    painter.setPen(QPen(QColor(255, 255, 255), 1));       // 设置刻度线的颜色
+    
+    // 绘制短刻度线
+    for (int i = 0; i < sScale_count; i ++) {
+        if (i % 5 != 0) {
+            painter.drawLine(QPoint(67 - 5, 5*i), QPoint(67, 5 * i));
+        }
+    }
+    
+    // 绘制长刻度线
+    for (int i = 0; i < lScale_count; i ++) {
+        painter.drawLine(QPoint(67 - 10, 25 * i), QPoint(67, 25 * i));
+    }
+}
+```
+
+
+
+(5) 创建表盘控件，设置表盘控件的大小，绘制表盘背景；在表盘控件中绘制指针；最后表盘控件加载到窗口控件中；
+
+首先创建表盘控件dialock，还是基本操作，setGeometry设置dialock控件的大小，然后重写paintEvent函数，利用drawPixmap设置dalock控件的背景；
+
+之后我们要在表盘控件中绘制指针；
+
+第一步 先将绘制点平移到dialock控件的正中间；第二步 找到该点 左边半个指针的宽度，上面（一个指针的长度 - 指针圈的一半）的位置；这里才是最终的绘制点；然后设置旋转角度；第三步 绘制指针，设置指针背景
+
+最后我们要把表盘控件添加到窗口控件中，跟之前一样的操作；窗口控件中添加成员表盘控件类指针，然后在loadWidgest里new一个表盘控件对象初始化这个指针，同时指定窗口控件为表盘指针控件的父控件；
+
+```cpp
+// dialock
+class DialClock : public QWidget
+{
+    Q_OBJECT
+public:
+    explicit DialClock(QWidget *parent = nullptr);
+    virtual ~DialClock();
+
+protected:
+    void paintEvent(QPaintEvent* event);
+};
+
+
+#define DIALCLOCK_STARTX 75
+#define DIALCLOCK_STARTY 188
+#define DIALCLOCK_WIDTH 285
+#define DIALCLOCK_HEIGHT 285
+
+#define NEEDLE_WIDTH 26
+#define NEEDLE_HEIGHT 90
+
+
+DialClock::DialClock(QWidget *parent)
+    : QWidget{parent}
+{
+    setGeometry(DIALCLOCK_STARTX, DIALCLOCK_STARTY, DIALCLOCK_WIDTH, DIALCLOCK_HEIGHT);
+    setStyleSheet("background-color: rgba(0, 0, 0, 0)");
+}
+
+void DialClock::paintEvent(QPaintEvent *event)
+{
+    Q_UNUSED(event);
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing, true);   // 设置反锯齿
+    painter.setRenderHint(QPainter::SmoothPixmapTransform, true);  // 设置平滑处理
+    
+    // 绘制表盘背景
+    painter.save();
+    painter.drawPixmap(rect(), QPixmap(":/images/ImageResources/dial.png"));  // 绘制表盘背景
+    painter.restore();
+    
+    // 绘制指针
+    painter.save();
+    painter.translate(width()/ 2, height() / 2);    // 平移到中心点
+    painter.rotate(-45);                    // 旋转指针
+    painter.drawPixmap(-13, -78, NEEDLE_WIDTH, NEEDLE_HEIGHT, QPixmap(":/images/ImageResources/needle.png"));
+    painter.restore();
+}
+
+
+
+// window widget
+class WindowWidget : public QWidget
+{
+    Q_OBJECT
+explicit WindowWidget(QWidget* parent = nullptr);
+virtual ~WindowWidget();
+
+private:
+    void loadFrontWidgets();
+
+private:
+    DialClock* pDialClock;
+};
+
+WindowWidget::WindowWidget(QWidget* parent) : QWidget(parent)
+{
+    loadFrontWidgets();
+}
+
+void WindowWidget::loadFrontWidgets()
+{
+    pDialClock = new DialClock(this);  // 表盘控件指定当前控件为父控件
+}
+
+WindowWidget::~WindowWidget()
+{
+    if (pDialClock) {
+        delete pDialClock;
+        pDialClock = nullptr;
+    }
+}
+```
