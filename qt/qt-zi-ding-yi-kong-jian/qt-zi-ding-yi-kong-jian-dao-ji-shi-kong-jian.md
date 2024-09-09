@@ -324,6 +324,11 @@ protected:
     void paintEvent(QPaintEvent* event);
 };
 
+void StrechRuler::onRulerHeaderMove(int aValue)
+{
+    repaint();
+}
+
 void StrechRuler::paintEvent(QPaintEvent* event)
 {
     Q_UNUSED(event);
@@ -458,3 +463,65 @@ WindowWidget::~WindowWidget()
     }
 }
 ```
+
+
+
+(6) strechruler控件的尺子拉动时，diaclock控件的指针进行对应旋转
+
+很明显我们需要 strechruler控件 和 diaclock控件 进行通信，具体来说就是strechruler的尺子长度变化时，发送信号 rulerstrechSignal(int) 将长度比率传给strechruler控件，strechruler控件收到信号调用槽函数setupClockTime(int)设置当前的rotateValue，然后repaint重新绘制指针；
+
+其中由于strechruler控件和diaclock控件不是父子控件关系，但是它们有共同的父控件window widget；所以我们将槽函数声明为public，然后在window widget中connect信号和槽；
+
+```cpp
+// strechruler
+class StrechRuler : public QWidget
+{
+signals:
+    void rulerStrechSignal(float value);
+}
+
+void StrechRuler::onRulerHeaderMove(int aValue)
+{
+    float dialRatio = pRulerHeader->pos().y() / 486.0;
+    emit rulerStrechSignal(dialRatio);
+}
+
+// diaclock
+class DialClock : public QWidget
+{
+
+public slots:
+    void setupClockTime(float value);
+
+private:
+    float rotateValue;
+}
+
+DialClock::DialClock(QWidget *parent) : QWidget{parent}
+{
+    rotateValue = 0.0;   // 设置旋转角度的初始值为0
+}
+
+void DialClock::setupClockTime(float value)
+{
+    rotateValue = 360 * value;   // strechruler传过来的是比率，*360得到旋转角度
+    repaint();                   // 旋转角度发生变化后，重新绘制表盘控件来重新绘制表盘控件中的指针
+}
+
+void DialClock::paintEvent(QPaintEvent *event)
+{
+    painter.rotate(rotateValue);   // 根据成员变量rotatevalue去旋转
+}
+
+
+// window widget
+void WindowWidget::loadFrontWidgets()
+{
+    // 连接strechruler控件中的信号和diaclock中的槽函数
+    // 注意信号都是public的，槽函数可以随意限定，这里在diaclock中的父控件中connect，所以diaclock的槽函数要设为public
+    connect(pStrechRuler, SIGNAL(rulerStrechSignal(float)), pDialClock, SLOT(setupClockTime(float)));
+}
+```
+
+
+
