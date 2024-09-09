@@ -525,3 +525,324 @@ void WindowWidget::loadFrontWidgets()
 
 
 
+(7) 创建一个QLabel控件用来显示倒计时时间，创建两个QPushButton按钮，一个用来开始倒计时，一个用来复位
+
+这三个控件不需要自定义，因为QT内部已经有比较贴合的控件了；这三个控件都是加载在window widget上；
+
+```cpp
+// window widget
+class WindowWidget : public QWidget
+{
+private:
+    void loadFrontWidgets();
+    
+private:
+    QLabel* pTimeLabel;
+    QPushButton* pPlayButton;
+    QPushButton* pResetButton;
+}
+
+
+void WindowWidget::loadFrontWidgets()
+{
+    // 设置timelabal的字体
+    QFont font;
+    font.setFamily("PingFang TC");
+    font.setWeight(25);
+    font.setPixelSize(35);
+    
+    // 创建一个timelabel控件
+    pTimeLabel = new QLabel(this);
+    pTimeLabel->setGeometry(138,525,160,60);
+    pTimeLabel->setFont(font);
+    pTimeLabel->setStyleSheet("background: transparent; color: 3d16b5d");
+    pTimeLabel->setAlignment(Qt::AlignCenter);
+    pTimeLabel->setText("00:00");
+
+    
+    // 创建一个playbutton控件
+    pPlayButton = new QPushButton(this);
+    pPlayButton->setGeometry(111,630,TOOLBUTTON_WIDTH,TOOLBUTTON_WIDTH);
+    pPlayButton->setIcon(QIcon(":/images/ImageResources/play.png"));
+    pPlayButton->setIconSize(QSize(TOOLBUTTON_WIDTH, TOOLBUTTON_HEIGHT));
+    pPlayButton->setAutoFillBackground(true);
+    pPlayButton->setFlat( true );
+    pPlayButton->setStyleSheet("QPushButton{background: transparent;}");
+    
+    // 创建一个resetbutton控件
+    pResetButton = new QPushButton(this);
+    pResetButton->setGeometry(251,630,TOOLBUTTON_WIDTH,TOOLBUTTON_WIDTH);
+    pResetButton->setIcon(QIcon(":/images/ImageResources/reset.png"));
+    pResetButton->setIconSize(QSize(TOOLBUTTON_WIDTH, TOOLBUTTON_HEIGHT));
+    pResetButton->setAutoFillBackground(true);
+    pResetButton->setFlat( true );
+    pResetButton->setStyleSheet("QPushButton{background: transparent;}");
+}
+```
+
+
+
+(8) 停止拖动rulerheader后，设置timelabal里的时间
+
+很明显，我们需要strechruler控件和timelabel的父控件（window widget)进行通信；具体来说在strechruler的槽函数onRulerHeaderMoveDone()中，发出信号rulerStrechDoneSignal(dialRatio)将当前尺子的比例传给window widget，window widget接收到信号后调用槽函数onRulerStrechDone(float value)，该槽函数中我们使用calculateFormateTimeWithSeconds函数去计算格式化后的时间；然后渲染到QLabel中
+
+```cpp
+// strechruler
+class StrechRuler : public QWidget
+{
+signals:
+    void rulerStrechDoneSignal(float value);
+
+private slots:
+    void onRulerHeaderMoveDone();
+}
+
+void StrechRuler::onRulerHeaderMoveDone()
+{
+    currentPosY = pRulerHeader->pos().y();
+    float dialRatio = pRulerHeader->pos().y() / 486.0;
+    emit rulerStrechDoneSignal(dialRatio);
+}
+
+
+// window widget
+class WindowWidget : public QWidget
+{
+private:
+    void loadFrontWidgets();
+    QString calculateFormatTimeWithSeconds(int seconds);
+
+private slots:
+    void onRulerStrechDone(float value);
+}
+
+void WindowWidget::loadFrontWidgets()
+{
+    connect(pStrechRuler, SIGNAL(rulerStrechDoneSignal(float)),this, SLOT(onRulerStrechDone(float)));
+}
+
+void WindowWidget::onRulerStrechDone(float value)
+{
+    int mSeconds = (int)3600 * value;
+    QString formatTime = calculateFormatTimeWithSeconds(mSeconds);
+    pTimeLabel->setText(formatTime);
+}
+
+
+QString WindowWidget::calculateFormatTimeWithSeconds(int seconds)
+{
+    int tMinutes = seconds / 60;
+    int tSeconds = seconds - tMinutes * 60;
+
+    QString strMinutes = QString("%1").arg(tMinutes);
+    QString strSeconds = QString("%1").arg(tSeconds);
+
+    if ((tMinutes < 10) && (tMinutes >= 0)) {
+        strMinutes = QString("0%1").arg(tMinutes);
+    }
+
+    if ((tSeconds < 10) && (tSeconds >= 0)) {
+        strSeconds = QString("0%1").arg(tSeconds);
+    }
+
+    QString formatTime = QString("%1: %2").arg(strMinutes).arg(strSeconds);
+
+    return formatTime;
+}
+```
+
+
+
+(8) 加入倒计时功能
+
+加入倒计时功能，首先需要加入定时器；
+
+在window widget里使用定时器，我们有固定的写法；创建一个QTimer指针，定义一个isTimerPlaying变量记录定时器是否在运行，然后在window widget的构造函数里，初始化isTimerPlaying，new一个QTimer对象去初始化QTimer指针；最后connect 定时器的timeout信号和处理函数
+
+```cpp
+class WindowWidget : public QWidget
+{
+    bool    isTimerPlaying;
+    QTimer* pCountDownTimer;
+}
+
+WindowWidget::WindowWidget(QWidget* parent) : QWidget(parent)
+{
+    isTimerPlaying = false;
+    pCountDownTimer = new QTimer(this);
+    connect(pCountDownTimer, SIGNAL(timeout()), this, SLOT(onCountDownTimerProcess()));
+}
+```
+
+
+
+然后，start按钮 点中之后，对应的槽函数里开启定时器，改变isTimerPlaying的状态，设置playbutton的背景为pause；start按钮取消点中之后，对应的槽函数里关闭定时器，改变isTimerPlaying的状态，最后playbutton的背景为play；
+
+reset按钮点击之后，定时器复位（isTimerPlaying = false, stop())，playbutton复位（背景图片复位），当前秒数复位，timelabel的显示时间复位，表盘指针复位（调用dialclock的槽函数setupClockTime将指针恢复原位），rulerheader复位（调用strechruler的public函数setRulerReset将rulerheader移动到原点）
+
+```cpp
+class WindowWidget : public QWidget
+{
+private slots:
+    void onPlayButtonClicked();
+    void onResetButtonClicked();
+}
+
+void WindowWidget::loadFrontWidgets()
+{
+    connect(pPlayButton,SIGNAL(clicked(bool)),SLOT(onPlayButtonClicked()));
+    connect(pResetButton,SIGNAL(clicked(bool)),SLOT(onResetButtonClicked()));
+}
+
+
+void WindowWidget::onPlayButtonClicked()
+{
+    if(isTimerPlaying == true)
+    {
+        if(pCountDownTimer->isActive()){
+            pCountDownTimer->stop();
+            isTimerPlaying = false;
+        }
+        pPlayButton->setIcon(QIcon(":/images/ImageResources/play.png"));
+    }
+    else{
+        pCountDownTimer->start(1000);
+        isTimerPlaying = true;
+        pPlayButton->setIcon(QIcon(":/images/ImageResources/pause.png"));
+    }
+}
+
+void WindowWidget::onResetButtonClicked()
+{
+    if(isTimerPlaying == true)
+    {
+        if(pCountDownTimer->isActive()){
+            pCountDownTimer->stop();
+        }
+    }
+
+    pPlayButton->setIcon(QIcon(":/images/ImageResources/play.png"));
+    isTimerPlaying = false;
+
+    rulerSettedSeconds =0;
+    pTimeLabel->setText("00:00");
+    pDialClock->setupClockTime(0.0);
+    pStrechRuler->setRulerReset();
+}
+```
+
+定时器的处理函数中，每次timeout后，我们需要将当前的时间放进timelabel中，所以我们使用一个成员变量rulerSettedSeconds去记录当前时间的秒数；同时timeout后streachruler中的尺子长度我们也需要改变；尺子长度改变我们封装成updateRulerHeight函数，window widget中将比率传过去；这里是父控件通知子控件，不需要信号槽，只需要将子控件的对应处理函数声明为public就行；
+
+```cpp
+class WindowWidget : public QWidget
+{
+private:
+    int rulerSettedSeconds;
+}
+
+void WindowWidget::onCountDownTimerProcess()
+{
+    if(rulerSettedSeconds <=0)
+    {
+        onResetButtonClicked();
+    }
+
+    QString formateTime = calculateFormatTimeWithSeconds(rulerSettedSeconds);
+    pTimeLabel->setText(formateTime);
+
+    float currentRatio = rulerSettedSeconds / 3600.0;
+    pStrechRuler->updateRulerHeight(currentRatio);
+    rulerSettedSeconds--;
+}
+
+// strechruler
+class StrechRuler : public QWidget
+{
+public:
+    void updateRulerHeight(float value);
+    void setRulerReset();
+}
+
+void StrechRuler::updateRulerHeight(float value)
+{
+    int currentY = value * RULER_MAX_HEGIHT;
+    pRulerHeader->move(originalPostion.rx(), currentY);
+
+    repaint();
+}
+
+void StrechRuler::setRulerReset()
+{
+    pRulerHeader->move(originalPostion.rx(),0);
+    currentPosY =0;
+    repaint();
+}
+```
+
+
+
+(9) 考虑到我们在定时器启动的情况下，有可能去拉动尺子，所以尺子拉动停下的时候，我们不仅仅希望它显示新的时间，还希望显示新的时间后，定时器关闭，start按钮显示play图片；
+
+```cpp
+void WindowWidget::onRulerStrechDone(float value)
+{
+    ...
+    if (pCountDownTimer->isActive()) {
+        pCountDownTimer->stop();
+        isTimerPlaying = false;
+    }
+    pPlayButton->setIcon(QIcon(":/images/ImageResources/play.png"));
+}
+```
+
+
+
+## 总结
+
+其实这个自定义控件的案例还是比较复杂的，大量的运用了控件之间的通信；ui部分个人感觉难度不大，这里主要总结一下控件之间通信
+
+
+
+控件之间的通信，可以总结为以下三种，我们能看出不是所有的控件之间的通信我们都要使用信号槽
+
+1.  子控件传递信息给父控件，子控件通知父控件，使用信号槽；
+
+    具体来说，此时槽函数定义在接收信号的父控件中，修饰为private，然后父控件中connect信号和槽
+2.  互相独立的子控件之间通信，使用信号槽；
+
+    具体来说，我们先找到这两个子控件的公共父控件，然后槽函数定义在接收信号的子控件中，修饰为public，然后父控件中connect信号和槽（如果子空间的槽函数不修饰为public，无法在父控件中访问到，自然也就不能connect了）
+3.  父控件传递信息给子控件，父控件通知子控件，此时不需要使用信号槽
+
+    具体来说，子控件的处理函数直接修饰为public，然后我们就可以直接在父控件中调用子控件的public函数了
+4. QT中一些控件自定义了一些信号，此时直接在控件所在的父控件中实现槽函数；
+
+
+
+rulerheader鼠标上下拖动：
+
+本质就是rulerheader要在它的父控件里拖动，所以rulerheader需要传递鼠标偏移量给父控件；同时鼠标停下时，rulerheader需要通知父控件记录rulerheader的位置；使用信号槽，rulerheader中的mouseEvent里发出信号，然后strechruler里实现槽函数，strechruler中connect
+
+
+
+rulerheader上下拖动时，表盘控件中的指针也转动：
+
+本质就是rulerheader拖动时，传递strechruler的尺子比率给表盘控件；rulerheader拖动时strechruler的所有操作已经封装在了对应的槽函数中；所以在strechruler对应的槽函数中，我们传递尺子比率给表盘控件；使用信号槽，strechruler的对应rulerheader move时的槽函数中发出信号，然后表盘控件中实现槽函数，window widget中connect
+
+
+
+rulerheader上下拖动时，timelabel设置对应时间
+
+本质就是rulerheader拖动时，传递strechruler的尺子比率给timelabl（自带控件的父控件）；所以在strechruler对应的槽函数中，我们传递尺子比率给window widget；使用信号槽，strechruler中对应的槽函数中发出信号，然后timelabel的父控件里实现对应的槽函数，window widget中connect
+
+
+
+start按钮选中定时器开启，取消选中定时器关闭，reset按钮点击后所有控件复位
+
+按钮选中，取消选中，点击都是QT自带的信号，所以直接在按钮所在window widget里实现对应的槽函数即可；
+
+
+
+window widget里的各种函数中，可能需要去传递信息给子控件或者通知子控件
+
+此时直接在子控件中去实现函数，注意一定要修饰为public；然后window widget里直接调用这些public函数操作子控件
+
