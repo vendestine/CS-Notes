@@ -75,6 +75,8 @@
     * [C++什么时候生成默认构造函数](c++/c++-mian-shi-ti/c++-shen-me-shi-hou-sheng-cheng-mo-ren-gou-zao-han-shu.md)
     * [C++什么时候生成默认拷贝构造函数](c++/c++-mian-shi-ti/c++-shen-me-shi-hou-sheng-cheng-mo-ren-kao-bei-gou-zao-han-shu.md)
     * [C++ 什么是深拷贝，什么是浅拷贝](c++/c++-mian-shi-ti/c++-shen-me-shi-shen-kao-bei-shen-me-shi-qian-kao-bei.md)
+    * [面向对象的三大特征](c++/c++-mian-shi-ti/mian-xiang-dui-xiang-de-san-da-te-zheng.md)
+* [简述多态实现原理](jian-shu-duo-tai-shi-xian-yuan-li.md)
 * [QT](qt/README.md)
   * [QT开发环境](qt/qt-kai-fa-huan-jing/README.md)
     * [QT Creator](qt/qt-kai-fa-huan-jing/qt-creator.md)
