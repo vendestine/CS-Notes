@@ -1,6 +1,6 @@
 # 简述多态实现原理
 
-<figure><img src=".gitbook/assets/简述多态实现原理 (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/简述多态实现原理 (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
