@@ -16,7 +16,9 @@
 
 (2) LRL52 CS144讲解视频  [https://space.bilibili.com/697699241](https://space.bilibili.com/697699241)
 
-(3) 官方lab manual：[https://github.com/LRL52/CS144-Sponge/tree/master/labs\_pdf\_21](https://github.com/LRL52/CS144-Sponge/tree/master/labs\_pdf\_21)
+(3) LRL52 CS144 github  [https://github.com/LRL52/CS144-Sponge](https://github.com/LRL52/CS144-Sponge)
+
+(3) 官方lab manual  [https://github.com/LRL52/CS144-Sponge/tree/master/labs\_pdf\_21](https://github.com/LRL52/CS144-Sponge/tree/master/labs\_pdf\_21)
 
 
 
