@@ -29,3 +29,11 @@
 有参构造函数的初始化列表初始化 使用make format后的格式，之后的代码里可以借鉴
 
 <figure><img src="../../.gitbook/assets/image (40).png" alt=""><figcaption></figcaption></figure>
+
+
+
+(3) Moving a temporary object prevents copy elision (fix available)
+
+std::move()的参数应该是左值，如果参数事右值，就会报这个错误；
+
+返回类型 是非引用或者是右值引用，返回值都是右值

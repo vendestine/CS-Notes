@@ -26,6 +26,8 @@
 
 (1) pku大神的CS144 github实现非常简洁  [https://github.com/PKUFlyingPig/CS144-Computer-Network](https://github.com/PKUFlyingPig/CS144-Computer-Network)
 
-(2) 全英文讲解和代码，代码设计非常优雅  [https://luolibrary.com/categories/CS144/](https://luolibrary.com/categories/CS144/)
+(2) 全英文讲解和代码，代码设计非常优雅 &#x20;
+
+[https://luolibrary.com/categories/CS144/](https://luolibrary.com/categories/CS144/)      [https://github.com/shejialuo/CS144](https://github.com/shejialuo/CS144)
 
 (3) 阿苏的CS144讲解，讲解角度比较照顾小白，切入角度不错 [https://space.bilibili.com/16765968/channel/collectiondetail?sid=696216](https://space.bilibili.com/16765968/channel/collectiondetail?sid=696216)
