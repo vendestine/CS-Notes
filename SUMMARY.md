@@ -123,3 +123,4 @@
     * [lab 4](xiang-mu/cs144/lab-4.md)
 * [Git](git/README.md)
   * [Git 分支相关命令](git/git-fen-zhi-xiang-guan-ming-ling.md)
+  * [Git开发常用操作](git/git-kai-fa-chang-yong-cao-zuo.md)
