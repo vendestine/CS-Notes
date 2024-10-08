@@ -107,9 +107,9 @@ void get_URL(const string &host, const string &path) {
 
 (2) bytestream
 
-记录一下遇到的问题
 
 
+2.1 记录一下遇到的问题
 
 eof的预期老是出错，看一下这个test，其实就很明显了；读buffer时的eof需要两个条件，buffer为空，同时写入eof(input\_ended为ture)；
 
@@ -133,7 +133,159 @@ eof的预期老是出错，看一下这个test，其实就很明显了；读buff
 
 
 
+lab0 pass 100%
+
 <figure><img src="../../.gitbook/assets/image (55).png" alt=""><figcaption></figcaption></figure>
+
+
+
+2.2 思路和代码
+
+lab0总体要求就是要得到一个字节流对象，所以封装设计了一个字节流类ByteStream
+
+ByteStream类对象需要什么，很明显为了模拟字节流对象，我们需要一个队列来存储字节流，然后根据构造函数很明显，需要知道capacity；总体设计还是比较清晰。
+
+
+
+实现成员函数的时候，我是先实现wirte（input)，然后实现read（output)；先分析一下成员函数之间是否有依赖关系；像read系列操作中的 read，peek\_out，pop\_out，很明显read是可以直接依赖peek\_out和pop\_out的；所以没必要从头写。总体来说，难度不大。
+
+```cpp
+class ByteStream {
+  private:
+    bool _error{};  //!< Flag indicating that the stream suffered an error.
+
+    bool _end_input{};
+    std::deque<char> _buffer{};
+    size_t _capacity;
+    size_t _bytes_read{};
+    size_t _bytes_write{};
+
+  public:
+    //! Construct a stream with room for `capacity` bytes.
+    ByteStream(const size_t capacity);
+
+    //! \name "Input" interface for the writer
+    //!@{
+
+    //! Write a string of bytes into the stream. Write as many
+    //! as will fit, and return how many were written.
+    //! \returns the number of bytes accepted into the stream
+    size_t write(const std::string &data);
+
+    //! \returns the number of additional bytes that the stream has space for
+    size_t remaining_capacity() const;
+
+    //! Signal that the byte stream has reached its ending
+    void end_input();
+
+    //! Indicate that the stream suffered an error.
+    void set_error() { _error = true; }
+    //!@}
+
+    //! \name "Output" interface for the reader
+    //!@{
+
+    //! Peek at next "len" bytes of the stream
+    //! \returns a string
+    std::string peek_output(const size_t len) const;
+
+    //! Remove bytes from the buffer
+    void pop_output(const size_t len);
+
+    //! Read (i.e., copy and then pop) the next "len" bytes of the stream
+    //! \returns a string
+    std::string read(const size_t len);
+
+    //! \returns `true` if the stream input has ended
+    bool input_ended() const;
+
+    //! \returns `true` if the stream has suffered an error
+    bool error() const { return _error; }
+
+    //! \returns the maximum amount that can currently be read from the stream
+    size_t buffer_size() const;
+
+    //! \returns `true` if the buffer is empty
+    bool buffer_empty() const;
+
+    //! \returns `true` if the output has reached the ending
+    bool eof() const;
+    //!@}
+
+    //! \name General accounting
+    //!@{
+
+    //! Total number of bytes written
+    size_t bytes_written() const;
+
+    //! Total number of bytes popped
+    size_t bytes_read() const;
+    //!@}
+};
+
+
+
+#include "byte_stream.hh"
+ByteStream::ByteStream(const size_t capacity) : _capacity(capacity) {}
+
+size_t ByteStream::write(const string &data) {
+    size_t write_count = min(data.size(), remaining_capacity());
+    for (auto it = data.begin(); it < data.begin() + write_count; ++it) {
+        _buffer.push_back(*it);
+    }
+    _bytes_write += write_count;
+    return write_count;
+}
+
+//! \param[in] len bytes will be copied from the output side of the buffer
+string ByteStream::peek_output(const size_t len) const {
+    string str{};
+    if (buffer_size() >= len) {
+        for (auto it = _buffer.begin(); it < _buffer.begin() + len; it++) {
+            str.push_back(*it);
+        }
+    }
+    return str;
+}
+
+//! \param[in] len bytes will be removed from the output side of the buffer
+void ByteStream::pop_output(const size_t len) {
+    size_t read_count = 0;
+    if (buffer_size() >= len) {
+        int count = len;
+        for (int i = 0; i < count; i++) {
+            _buffer.pop_front();
+            read_count++;
+        }
+    }
+    _bytes_read += read_count;
+}
+
+//! Read (i.e., copy and then pop) the next "len" bytes of the stream
+//! \param[in] len bytes will be popped and returned
+//! \returns a string
+std::string ByteStream::read(const size_t len) {
+    auto str = peek_output(len);
+    pop_output(len);
+    return str;
+}
+
+void ByteStream::end_input() { _end_input = true; }
+
+bool ByteStream::input_ended() const { return _end_input; }
+
+size_t ByteStream::buffer_size() const { return _buffer.size(); }
+
+bool ByteStream::buffer_empty() const { return _buffer.empty(); }
+
+bool ByteStream::eof() const { return input_ended() && buffer_empty(); }
+
+size_t ByteStream::bytes_written() const { return _bytes_write; }
+
+size_t ByteStream::bytes_read() const { return _bytes_read; }
+
+size_t ByteStream::remaining_capacity() const { return _capacity - _buffer.size(); }
+```
 
 
 
