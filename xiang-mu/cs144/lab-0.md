@@ -95,6 +95,46 @@ void get_URL(const string &host, const string &path) {
 }
 ```
 
+<div align="left">
+
+<figure><img src="../../.gitbook/assets/image (51).png" alt=""><figcaption></figcaption></figure>
+
+</div>
+
+<figure><img src="../../.gitbook/assets/image (52).png" alt=""><figcaption></figcaption></figure>
+
+
+
+(2) bytestream
+
+记录一下遇到的问题
+
+
+
+eof的预期老是出错，看一下这个test，其实就很明显了；读buffer时的eof需要两个条件，buffer为空，同时写入eof(input\_ended为ture)；
+
+<div align="left">
+
+<figure><img src="../../.gitbook/assets/image (54).png" alt=""><figcaption></figcaption></figure>
+
+</div>
+
+
+
+我最初的写法是 data.size() <= remain\_capacity()就写入，这个案例报错；
+
+很明显，其实需求应该是截取一部分data去发送
+
+<div align="left">
+
+<figure><img src="../../.gitbook/assets/image (53).png" alt=""><figcaption></figcaption></figure>
+
+</div>
+
+
+
+<figure><img src="../../.gitbook/assets/image (55).png" alt=""><figcaption></figcaption></figure>
+
 
 
 ### Debug&#x20;

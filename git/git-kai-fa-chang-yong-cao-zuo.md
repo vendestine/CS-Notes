@@ -11,14 +11,14 @@
 如果你已经完成了在 `dev` 分支上的更改，并且希望保留这些更改，可以将它们提交到 `dev` 分支：
 
 ```bash
-bashgit add .  
+git add .  
 git commit -m "Save changes before switching to master"  
 ```
 
 然后，你可以安全地切换到 `master` 分支：
 
 ```bash
-bashgit checkout master  
+git checkout master  
 ```
 
 #### 2. 暂存更改（Stash）
@@ -26,19 +26,19 @@ bashgit checkout master
 如果你不想立即提交更改，可以使用 `git stash` 将更改暂存起来：
 
 ```bash
-bashgit stash  
+git stash  
 ```
 
 这会将你的更改保存到一个临时存储区，并恢复工作目录到干净状态。然后，你可以切换到 `master` 分支：
 
 ```bash
-bashgit checkout master  
+git checkout master  
 ```
 
 当你准备好恢复 `dev` 分支上的更改时，可以使用：
 
 ```bash
-bashgit checkout dev  
+git checkout dev  
 git stash pop  
 ```
 
@@ -49,7 +49,7 @@ git stash pop
 如果你想保留当前的更改，但又不想提交到 `dev` 分支，可以创建一个新的分支：
 
 ```bash
-bashgit checkout -b temp-branch  
+git checkout -b temp-branch  
 ```
 
 这会创建一个名为 `temp-branch` 的新分支，并切换到该分支。你可以在这个新分支上继续工作，或者稍后再将更改合并回 `dev` 分支。
@@ -73,12 +73,12 @@ bashgit checkout -b temp-branch
 1.  **切换到 `master` 分支**：
 
     ```bash
-    bashgit checkout master  
+    git checkout master  
     ```
 2.  **合并 `dev` 分支并自动选择 `master` 的更改**：
 
     ```bash
-    bashgit merge -X ours dev  
+    git merge -X ours dev  
     ```
 
 #### 注意事项
@@ -101,12 +101,12 @@ bashgit checkout -b temp-branch
 1.  **切换到 `master` 分支**：
 
     ```bash
-    bashgit checkout master  
+    git checkout master  
     ```
 2.  **合并 `dev` 分支并自动选择 `dev` 的更改**：
 
     ```bash
-    bashgit merge -X theirs dev  
+    git merge -X theirs dev  
     ```
 
 #### 注意事项
@@ -129,12 +129,12 @@ bashgit checkout -b temp-branch
 1.  **切换到 `master` 分支**：
 
     ```bash
-    bashgit checkout master  
+    git checkout master  
     ```
 2.  **合并 `dev` 分支**：
 
     ```bash
-    bashgit merge dev  
+    git merge dev  
     ```
 
     如果有冲突，Git 会提示你哪些文件存在冲突。
@@ -142,13 +142,13 @@ bashgit checkout -b temp-branch
     使用以下命令查看哪些文件存在冲突：
 
     ```bash
-    bashgit status  
+    git status  
     ```
 4.  **解决冲突**：\
     打开有冲突的文件，查找冲突标记（`<<<<<<<`, `=======`, `>>>>>>>`）。例如：
 
     ```plaintext
-    plaintext<<<<<<< HEAD  
+    <<<<<<< HEAD  
     // master 分支的内容  
     =======  
     // dev 分支的内容  
@@ -160,19 +160,19 @@ bashgit checkout -b temp-branch
     在解决完所有冲突后，使用以下命令将已解决的文件标记为已解决：
 
     ```bash
-    bashgit add <conflicted-file>  
+    git add <conflicted-file>  
     ```
 
     如果有多个文件，可以使用：
 
     ```bash
-    bashgit add .  
+    git add .  
     ```
 6.  **完成合并**：\
     一旦所有冲突都解决并标记为已解决，使用以下命令完成合并：
 
     ```bash
-    bashgit commit -m "Merge dev into master, resolved conflicts"  
+    git commit -m "Merge dev into master, resolved conflicts"  
     ```
 
 #### 总结
