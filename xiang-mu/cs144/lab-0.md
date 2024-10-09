@@ -4,17 +4,25 @@
 
 (1) 由于官方的sponge仓库已经不可见了，所以我们现在要自己建一个远程仓库，然后希望它和官方仓库一致。步骤如下：
 
-1. clone远程仓库，然后本地创建同名分支和远程分支一一对应
+1.1 clone远程仓库，然后本地创建同名分支和远程分支一一对应
 
 单独的clone只会clone只会clone下来主分支，但是我们希望clone下来所有分支，所以就同时在本地创建同名分支和远程分支一一对应
 
+<div align="left">
+
 <figure><img src="../../.gitbook/assets/image (47).png" alt=""><figcaption></figcaption></figure>
 
-2. 本地仓库的master分支回滚到lab0-startercode的commit；取消本地仓库和clone仓库的远程关联，添加自己的github远程仓库
+</div>
+
+1.2 本地仓库的master分支回滚到lab0-startercode的commit；取消本地仓库和clone仓库的远程关联，添加自己的github远程仓库
+
+<div align="left">
 
 <figure><img src="../../.gitbook/assets/image (48).png" alt=""><figcaption></figcaption></figure>
 
-3. 将本地仓库的所有分支push到自己的远程仓库中；现在我们自己的远程仓库就和官方的远程仓库一致了。
+</div>
+
+1.3 将本地仓库的所有分支push到自己的远程仓库中；现在我们自己的远程仓库就和官方的远程仓库一致了。
 
 <div align="left">
 
@@ -24,7 +32,7 @@
 
 <figure><img src="../../.gitbook/assets/image (50).png" alt=""><figcaption></figcaption></figure>
 
-4. 远程仓库和官方的仓库一致了，每做一个lab就merge远程分支的lab-starter分支到本地分支上，然后最后本地的master分支push到远程仓库的master分支下。
+1.4 远程仓库和官方的仓库一致了，每做一个lab就merge远程分支的lab-starter分支到本地分支上，然后最后本地的master分支push到远程仓库的master分支下。
 
 
 
@@ -101,8 +109,6 @@ void get_URL(const string &host, const string &path) {
 
 </div>
 
-<figure><img src="../../.gitbook/assets/image (52).png" alt=""><figcaption></figcaption></figure>
-
 
 
 (2) bytestream
@@ -111,7 +117,7 @@ void get_URL(const string &host, const string &path) {
 
 2.1 记录一下遇到的问题
 
-eof的预期老是出错，看一下这个test，其实就很明显了；读buffer时的eof需要两个条件，buffer为空，同时写入eof(input\_ended为ture)；
+eof expectation老是出错，看一下这个test，其实就很明显了；读buffer时的eof需要两个条件，buffer为空，同时写入eof(input\_ended为ture)；
 
 <div align="left">
 
@@ -120,6 +126,8 @@ eof的预期老是出错，看一下这个test，其实就很明显了；读buff
 </div>
 
 
+
+write "cat"进capacity = 2的buffer出错
 
 我最初的写法是 data.size() <= remain\_capacity()就写入，这个案例报错；
 
