@@ -16,7 +16,7 @@ C++继承介绍：C++非继承的类相互是没有关联性的，假设现在�
 
 (2) 若父类没有默认的构造函数，子类的构造函数又未调用父类的构造函数，则无法编译
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1).png" alt=""><figcaption><p>父类没有默认构造函数</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1).png" alt=""><figcaption><p>父类没有默认构造函数</p></figcaption></figure>
 
 ## 继承 相关代码
 
