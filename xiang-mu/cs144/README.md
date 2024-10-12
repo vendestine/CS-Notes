@@ -1,12 +1,12 @@
 # CS144
 
-## 调试方法
+### 调试方法
 
 我自己的开发环境是 VSCode + ubuntu22.04，所以调试我使用的是VSCode + gdb调试
 
 
 
-### vscode + gdb调试
+#### vscode + gdb调试
 
 (1) VSCode的调试是针对工作区而言的，我们首先在工作区创建launch.json文件
 
