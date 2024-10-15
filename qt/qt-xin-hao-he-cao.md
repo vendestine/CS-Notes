@@ -38,7 +38,7 @@ Qt5使用函数指针：clickedButton\_2
 
 <div align="left">
 
-<figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>QT4/QT5 connect不同写法</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>QT4/QT5 connect不同写法</p></figcaption></figure>
 
 </div>
 
@@ -50,7 +50,7 @@ connect to C++11 lambda：clickedButton\_3
 
 <div align="left">
 
-<figure><img src="../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Lambda表达式作为槽</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Lambda表达式作为槽</p></figcaption></figure>
 
 </div>
 

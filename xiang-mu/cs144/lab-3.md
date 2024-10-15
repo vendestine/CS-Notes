@@ -20,7 +20,7 @@ while循环的条件是 bytes\_in\_flight  < window\_size; 理论上说while循�
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -28,13 +28,13 @@ while循环的条件是 bytes\_in\_flight  < window\_size; 理论上说while循�
 
 (2) 重传syn失败
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 debug了一下，测试用例是tick了两次，两次加起来刚好一个rto的时间，check\_timeout成功，应该需要重传之前syn segment，但是我们没有重传syn，所以报错了。
 
 我现在的tick代码是这样的，此时还没有ack，window\_size = 0，所以没有进入if语句内部，没有重传syn；
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 正常情况 window\_size = 0, 然后发出的第一segment，ack后；使sender端的window\_size更新为receiver端的window\_size(应该是receiver端的capacity)；之后再发送的segment，没有ack，超时后可以进行重传。
 
@@ -46,7 +46,7 @@ debug了一下，测试用例是tick了两次，两次加起来刚好一个rto�
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
