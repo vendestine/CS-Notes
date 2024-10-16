@@ -124,4 +124,6 @@
 * [Git](git/README.md)
   * [Git 分支相关命令](git/git-fen-zhi-xiang-guan-ming-ling.md)
   * [Git开发常用操作](git/git-kai-fa-chang-yong-cao-zuo.md)
+  * [查看git信息，设置git信息](git/cha-kan-git-xin-xi-she-zhi-git-xin-xi.md)
+  * [git远程相关操作](git/git-yuan-cheng-xiang-guan-cao-zuo.md)
 * [Gitbook](gitbook.md)

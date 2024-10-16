@@ -8,7 +8,7 @@
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -34,7 +34,7 @@
 
 ### clone远程仓库
 
-如果你做的是最新的lab，那么直接clone官方仓库即可，这样就可以把官方远程仓库的所有分支拉取下来，之后我们每做一个lab，就merge对应的lab starter分支就行。
+如果你做的是最新的lab，那么直接clone官方仓库即可，这样就可以把官方远程仓库的所有分支拉取下来，之后我们每做一个lab，就merge对应的origin/labx-starter分支就行。
 
 
 
@@ -49,6 +49,36 @@
 具体流程请看lab0的搭建环境 section。
 
 注意：如果是中途更换环境，那么我们直接clone自己的远程仓库，接着开发就行。
+
+
+
+### 配置vscode远程开发
+
+我个人习惯使用vscode远程开发，步骤也很简单。
+
+(1) 打开remote explorer，add new remote
+
+<div align="left">
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+</div>
+
+<div align="left">
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+</div>
+
+添加之后，会在ssh config文件里看到该主机的信息，我们可以修改Host信息，方便自己之后找到想要的虚拟主机，其余的信息不能更改！
+
+<div align="left">
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+</div>
+
+之后为了方便开发，给远程主机下载一些常用的插件，比如c++ extension pack, clangd, git graph.
 
 &#x20;
 

@@ -138,15 +138,49 @@ test 104 - 151 failed or timeout
 
 网上查了一下原因，应该是环境的原因，但是sponge的官方镜像已经关闭了，所以这里使用最新的2024 winter给出的镜像 + virtual box。
 
-
-
 注意一定要用virtual box，vmware引入该镜像丢失了很多信息，例如没有端口转发配置，所以ssh无法连接，这里浪费了很多时间。
 
 
 
-最后测试成功，pass 100%，证明我的实现是没有问题的。
+迁移到新环境之后，编译有些问题，稍微做些调整
 
-<figure><img src="../../.gitbook/assets/image (107).png" alt=""><figcaption></figcaption></figure>
+<div align="left">
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+</div>
+
+<div align="left">
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+</div>
+
+adress.c文件里，加入#include \<array>
+
+然后环境里安装libpcap-dev
+
+
+
+迁移环境后，测试成功，pass 100%，证明我的实现是没有问题的。
+
+<div align="left">
+
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+
+</div>
+
+<div align="left">
+
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+
+</div>
+
+<div align="left">
+
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+
+</div>
 
 
 

@@ -20,7 +20,7 @@ while循环的条件是 bytes\_in\_flight  < window\_size; 理论上说while循�
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -28,13 +28,13 @@ while循环的条件是 bytes\_in\_flight  < window\_size; 理论上说while循�
 
 (2) 重传syn失败
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 debug了一下，测试用例是tick了两次，两次加起来刚好一个rto的时间，check\_timeout成功，应该需要重传之前syn segment，但是我们没有重传syn，所以报错了。
 
 我现在的tick代码是这样的，此时还没有ack，window\_size = 0，所以没有进入if语句内部，没有重传syn；
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 正常情况 window\_size = 0, 然后发出的第一segment，ack后；使sender端的window\_size更新为receiver端的window\_size(应该是receiver端的capacity)；之后再发送的segment，没有ack，超时后可以进行重传。
 
@@ -46,7 +46,7 @@ debug了一下，测试用例是tick了两次，两次加起来刚好一个rto�
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -60,7 +60,7 @@ _receiver_window_size = (_receiver_window_size == 0) ? 1 : _receiver_window_size
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -68,7 +68,7 @@ _receiver_window_size = (_receiver_window_size == 0) ? 1 : _receiver_window_size
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -78,11 +78,11 @@ _receiver_window_size = (_receiver_window_size == 0) ? 1 : _receiver_window_size
 
 看到这个错误很懵，137和1差的也太多了；
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 先看一下close到底是执行了什么操作
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 看代码，就是sender的byte\_stream停止“生产”数据，然后fill\_window，把现有的数据都封装成segment都发出去。
 
@@ -113,7 +113,7 @@ if (!_fin_sent && _stream.eof() &&
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
