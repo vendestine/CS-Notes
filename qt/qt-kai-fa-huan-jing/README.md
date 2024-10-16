@@ -18,7 +18,7 @@
 
 打开Maintenance Tool后，登录，然后选择要安装的QT版本，以及需要的模块（一般要包含MinGW 32位编译器）；如果之后需要安装/卸载 其余的模块，也是使用QT Maintenance Tool管理；
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 使用QT的时候，一般选择MINGW32/MINGW64位编译器，一般不建议使用VC++编译器；
 

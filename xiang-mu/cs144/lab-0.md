@@ -330,7 +330,7 @@ sock.write("GET " + path + "HTTP/1.1\r\n");
 sock.write("GET " + path + " HTTP/1.1 \r\n");
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
 
