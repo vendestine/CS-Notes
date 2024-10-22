@@ -20,7 +20,7 @@ while循环的条件是 bytes\_in\_flight  < window\_size; 理论上说while循�
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 

@@ -59,7 +59,7 @@ x64文件                 存储64位平台下的编译文件，里面还有Debu
 
 一个正常的VS解决方案的目录结构如下
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 解决方案的配置文件
