@@ -1,10 +1,10 @@
-# Git 分支相关命令
+# git分支相关操作
 
-## Git 分支相关命令
 
-### 1. 创建和删除分支
 
-#### 本地分支
+## 1. 创建和删除分支
+
+### 本地分支
 
 创建本地分支：
 
@@ -46,9 +46,9 @@ git branch | grep “feature/” | xargs git branch -d
 git branch | grep ”feature/“ | xargs git branch -D
 ```
 
-####
 
-#### 远程分支
+
+### 远程分支
 
 创建远程分支（通过推送本地分支）：
 
@@ -64,7 +64,7 @@ git push <remote-name> --delete <remote-branch>
 
 ###
 
-### 2. 查看分支
+## 2. 查看分支
 
 查看本地所有分支：
 
@@ -84,9 +84,9 @@ git branch -r
 git branch -a
 ```
 
-###
 
-### 3. 切换分支
+
+## 3. 切换分支
 
 #### 切换本地分支
 

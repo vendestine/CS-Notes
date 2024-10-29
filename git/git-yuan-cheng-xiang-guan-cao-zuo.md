@@ -2,6 +2,16 @@
 
 
 
+## 本地仓库初次上传到远程仓库
+
+<div align="left">
+
+<figure><img src="../.gitbook/assets/image (110).png" alt=""><figcaption></figcaption></figure>
+
+</div>
+
+
+
 ## clone完仓库后，本地选取对应的远程分支进行开发
 
 ```bash
