@@ -134,3 +134,4 @@
 * [Gitbook](gitbook.md)
 * [其他](qi-ta/README.md)
   * [Ubuntu使用](qi-ta/ubuntu-shi-yong.md)
+  * [vscode + clangd](qi-ta/vscode-+-clangd.md)
