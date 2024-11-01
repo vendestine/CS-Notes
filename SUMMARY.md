@@ -132,3 +132,5 @@
   * [查看git信息，设置git信息](git/cha-kan-git-xin-xi-she-zhi-git-xin-xi.md)
   * [.gitignore](git/.gitignore.md)
 * [Gitbook](gitbook.md)
+* [其他](qi-ta/README.md)
+  * [Ubuntu使用](qi-ta/ubuntu-shi-yong.md)
