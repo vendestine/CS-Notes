@@ -101,7 +101,7 @@ bashgit branch -vv
 
 
 
-## git push远程仓库出错
+## git push远程仓库authentication出错
 
 
 
@@ -126,3 +126,42 @@ bashgit branch -vv
 \[1] https://stackoverflow.com/questions/68775869/message-support-for-password-authentication-was-removed
 
 \[2] [https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage](https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage)
+
+
+
+## git push大文件失败
+
+要解决由于文件大小超过 GitHub 的限制而导致的 `git push` 失败问题，可以考虑以下几种方法：
+
+#### 1. 使用 Git Large File Storage (LFS)
+
+Git LFS 是一个 Git 扩展，专门用于处理大文件。通过使用 Git LFS，您可以将大文件存储在外部服务器上，从而避免 GitHub 的文件大小限制。
+
+**步骤：**
+
+1. **安装 Git LFS**：
+   * 根据您的系统，从 [Git LFS 官网](https://git-lfs.github.com/) 下载并安装。
+2.  **初始化 Git LFS**：
+
+    ```bash
+    bashgit lfs install  
+    ```
+3.  **跟踪大文件**：\
+    假设您的大文件路径是 `Resources/ffmpeg.exe`：
+
+    ```bash
+    bashgit lfs track "Resources/ffmpeg.exe"  
+    ```
+4.  **添加跟踪配置到仓库**：
+
+    ```bash
+    bashgit add .gitattributes  
+    ```
+5.  **提交和推送文件**：
+
+    ```bash
+    bashgit add Resources/ffmpeg.exe  
+    git commit -m "Add ffmpeg with Git LFS"  
+    git push origin main  
+    ```
+

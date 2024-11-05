@@ -131,6 +131,7 @@
   * [git代理相关操作](git/git-dai-li-xiang-guan-cao-zuo.md)
   * [查看git信息，设置git信息](git/cha-kan-git-xin-xi-she-zhi-git-xin-xi.md)
   * [.gitignore](git/.gitignore.md)
+  * [git基本概念](git/git-ji-ben-gai-nian.md)
 * [Gitbook](gitbook.md)
 * [其他](qi-ta/README.md)
   * [Ubuntu使用](qi-ta/ubuntu-shi-yong.md)
