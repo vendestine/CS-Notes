@@ -136,3 +136,4 @@
 * [其他](qi-ta/README.md)
   * [Ubuntu使用](qi-ta/ubuntu-shi-yong.md)
   * [vscode + clangd](qi-ta/vscode-+-clangd.md)
+  * [github copilot使用](qi-ta/github-copilot-shi-yong.md)

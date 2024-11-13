@@ -37,7 +37,7 @@ clangd的代码提示和补全，非常地强大，这里记录一下 vscode如�
 安装好后，得到一个压缩包，我们解压后，将clangd\_18.1.3放入对应install目录下
 
 ```json
-"clangd.path": "/home/cs144/.vscode-server/data/User/globalStorage
+"clangd.path": "/home/xxxx/.vscode-server/data/User/globalStorage
 /llvm-vs-code-extensions.vscode-clangd/install/18.1.3/clangd_18.1.3/bin/clangd",
 ```
 
