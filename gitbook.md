@@ -1,4 +1,4 @@
-# Gitbook
+# GitBook
 
 ## gitbook搭建博客
 
@@ -24,3 +24,18 @@
 为了保持gitbook上传的markdown，和最后同步到github的markdown的一致性。\
 编辑markdown文件，一级标题是文章名字，然后内容用二三四级标题即可。\
 编辑page，page标题是文章名字，然后内容用一二三级标题即可。
+
+
+
+## gitbook和github之间的同步
+
+gitbook和github之间的同步分为两种
+
+(1) github -> gitbook
+
+
+
+(2) gitbook -> github
+
+gitbook web端上，我们edit page，然后merge，就会自动同步到github仓库上去
+
