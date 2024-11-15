@@ -1,5 +1,188 @@
 # GitBook
 
+## gitbook node使用
+
+### 环境配置
+
+环境配置，我真的踩了很多坑，这里记录一下，防止以后换了新设备继续踩坑。
+
+(1) 彻底卸载原来的node和npm
+
+因为gitbook框架和高版本的node和npm适配，会出现很多奇怪的bug，所以我们使用较低版本version 10的node和配套的npm，但如果下载新的node和npm前，以前老版本的node和npm没有卸载干净，也会出一些奇奇怪怪的错误，所以首先一定要确保彻底卸载原来的node和npm。
+
+要彻底卸载 Node.js 和 npm，具体步骤取决于你使用的操作系统。以下是针对 Windows 和 macOS/Linux 的详细卸载步骤。
+
+要彻底卸载 Node.js 和 npm，具体步骤取决于你使用的操作系统。以下是针对 Windows 和 macOS/Linux 的详细卸载步骤。
+
+#### 在 Windows 上卸载 Node.js 和 npm
+
+1. **通过控制面板卸载**:
+   * 打开“控制面板”。
+   * 点击“程序” > “程序和功能”。
+   * 在程序列表中找到 **Node.js**，右键点击并选择“卸载”。
+   * 按照提示完成卸载。
+2. **删除残留文件**:
+   * 卸载后，检查以下目录并手动删除 Node.js 和 npm 的相关文件：
+     * `C:\Program Files\nodejs`（Node.js 安装目录）
+     * `C:\Users\<YourUsername>\AppData\Roaming\npm`（全局 npm 模块）
+     * `C:\Users\<YourUsername>\AppData\Roaming\npm-cache`（npm 缓存）
+     * `C:\Users\<YourUsername>\AppData\Local\Programs\Nodejs`（如果存在）
+3. **检查环境变量**:
+   * 右键点击“此电脑”或“计算机”，选择“属性”。
+   * 点击“高级系统设置” > “环境变量”。
+   * 在“系统变量”中找到 `Path` 变量，确保删除与 Node.js 相关的路径（例如 `C:\Program Files\nodejs\`）。
+4. **重启计算机**（可选）:
+   * 为确保所有更改生效，可以重启计算机。
+
+#### 在 macOS 上卸载 Node.js 和 npm
+
+1.  **使用 Homebrew 卸载**（如果是通过 Homebrew 安装的）:
+
+    ```bash
+    bashbrew uninstall node  
+    ```
+2.  **手动删除 Node.js 和 npm**:
+
+    * 打开终端，运行以下命令删除 Node.js 和 npm 的相关文件：
+
+    ```bash
+    bashsudo rm -rf /usr/local/bin/node  
+    sudo rm -rf /usr/local/bin/npm  
+    sudo rm -rf /usr/local/lib/node_modules  
+    sudo rm -rf /usr/local/include/node  
+    sudo rm -rf /usr/local/share/man/man1/node.1  
+    sudo rm -rf /usr/local/share/man/man1/npm.1  
+    ```
+3.  **检查和删除 npm 缓存**:
+
+    ```bash
+    bashsudo rm -rf ~/.npm  
+    sudo rm -rf ~/.node-gyp  
+    ```
+4. **检查环境变量**:
+   * 打开 `~/.bash_profile`、`~/.bashrc` 或 `~/.zshrc` 文件，确保没有与 Node.js 相关的路径。如果有，手动删除。
+5. **重启终端**:
+   * 为确保所有更改生效，可以重启终端。
+
+#### 在 Linux 上卸载 Node.js 和 npm
+
+1.  **使用包管理器卸载**:
+
+    * 如果是通过 `apt` 安装的（Debian/Ubuntu）:
+
+    ```bash
+    bashsudo apt remove nodejs npm  
+    ```
+
+    * 如果是通过 `yum` 安装的（CentOS/RHEL）:
+
+    ```bash
+    bashsudo yum remove nodejs npm  
+    ```
+
+    * 如果是通过 `dnf` 安装的（Fedora）:
+
+    ```bash
+    bashsudo dnf remove nodejs npm  
+    ```
+2.  **手动删除 Node.js 和 npm**:
+
+    * 运行以下命令删除 Node.js 和 npm 的相关文件：
+
+    ```bash
+    bashsudo rm -rf /usr/local/bin/node  
+    sudo rm -rf /usr/local/bin/npm  
+    sudo rm -rf /usr/local/lib/node_modules  
+    sudo rm -rf /usr/local/include/node  
+    sudo rm -rf /usr/local/share/man/man1/node.1  
+    sudo rm -rf /usr/local/share/man/man1/npm.1  
+    ```
+3.  **检查和删除 npm 缓存**:
+
+    ```bash
+    bashsudo rm -rf ~/.npm  
+    sudo rm -rf ~/.node-gyp  
+    ```
+4. **检查环境变量**:
+   * 打开 `~/.bash_profile`、`~/.bashrc` 或 `~/.zshrc` 文件，确保没有与 Node.js 相关的路径。如果有，手动删除。
+5. **重启终端**:
+   * 为确保所有更改生效，可以重启终端
+
+
+
+(2) 下载node version10，验证node和npm的版本
+
+官网下载 node v10：[https://nodejs.org/en/about/previous-releases](https://nodejs.org/en/about/previous-releases)\
+根据不同的平台，选择对应的安装程序：[https://nodejs.org/download/release/v10.24.1/](https://nodejs.org/download/release/v10.24.1/)
+
+```bash
+node -v
+npm -v
+```
+
+确认是v10版本的node和配套的npm就可以了
+
+<div align="left">
+
+<figure><img src=".gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+</div>
+
+(3) 安装gitbook
+
+```bash
+npm install -g gitbook-cli
+gitbook -V  
+```
+
+gitbook -V如果gitbook框架没有下载的话，会install，下载完成后再次执行gitbook -V验证是否安装成功
+
+<div align="left">
+
+<figure><img src=".gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+</div>
+
+
+
+### gitbook框架使用
+
+
+
+
+
+## gitbook node和gitbook web
+
+<mark style="background-color:orange;">gitbook最开始只是node端的一个框架</mark>，一般都是在node端下载gitbook框架，然后我们自己组织markdown文件，最后上传到服务器上，其实就和之前使用的hexo框架差不多
+
+之后又出现了web端，<mark style="background-color:orange;">web端其实可以看做一个云笔记</mark>，就是按照web page的方式编辑gitbook，然后编辑完后，会push到对应的gitbook仓库中
+
+两者之间的关系：gitbook web 和 gitbook node其实并不完全相同，gitbook web端实际上是原始的gitbook node + 定制插件和定制样式
+
+<div align="left">
+
+<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+</div>
+
+直接把gitbook web的仓库clone下来，然后用gitbook node去打开的时候，两者的界面还是有一些区别的
+
+gitbook web:
+
+<figure><img src=".gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+
+
+gitbook node:
+
+<figure><img src=".gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+
+
+结论：gitbook node端，可定制化更高，可以下载很多插件，同时页面ui貌似更大气好看一些，所以之后还是使用gitbook node端为主，配上一些好用的插件，提高生产力。
+
+
+
 ## gitbook的summary.md和README.md
 
 gitbook渲染到web page，主要就是通过所有的md文件 + summary.md + README.md\
