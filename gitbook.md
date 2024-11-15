@@ -6,6 +6,16 @@
 
 环境配置，我真的踩了很多坑，这里记录一下，防止以后换了新设备继续踩坑。
 
+参考：
+
+\[1] [https://zhuanlan.zhihu.com/p/343053359](https://zhuanlan.zhihu.com/p/343053359)
+
+\[2] [https://blog.csdn.net/m0\_74239772/article/details/132710525](https://blog.csdn.net/m0\_74239772/article/details/132710525)
+
+\[3] [https://www.cnblogs.com/hacv/p/14311409.html](https://www.cnblogs.com/hacv/p/14311409.html)
+
+
+
 (1) 彻底卸载原来的node和npm
 
 因为gitbook框架和高版本的node和npm适配，会出现很多奇怪的bug，所以我们使用较低版本version 10的node和配套的npm，但如果下载新的node和npm前，以前老版本的node和npm没有卸载干净，也会出一些奇奇怪怪的错误，所以首先一定要确保彻底卸载原来的node和npm。
