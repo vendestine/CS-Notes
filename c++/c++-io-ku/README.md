@@ -6,7 +6,7 @@ io 就是 input，output 的简写，也就是输入输出功能。<mark style="
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (30).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (103).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 

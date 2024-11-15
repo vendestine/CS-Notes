@@ -10,7 +10,7 @@ CS模型中的函数：
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (101).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 

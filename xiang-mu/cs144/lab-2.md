@@ -32,7 +32,7 @@ unwrap稍微困难一些，因为这是32位 映射到 64位，小值域 -> 大�
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (87).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (160).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -46,7 +46,7 @@ receiver要实现的函数不多，主要就是segmnet\_received这个函数。
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (88).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (161).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -88,7 +88,7 @@ syn ack的情况是空；fin ack的情况，就是窗口已经滑出了fin\_segm
 
 (1) 同时发syn + data + fin报错
 
-<figure><img src="../../.gitbook/assets/image (72).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (145).png" alt=""><figcaption></figcaption></figure>
 
 我在segment\_received函数里按照状态机，对收到的segment进行处理，用的if elseif else结构，这样写的话，对于一个segment只会进入其中一种状态。
 
@@ -100,13 +100,13 @@ syn ack的情况是空；fin ack的情况，就是窗口已经滑出了fin\_segm
 
 2.1&#x20;
 
-<figure><img src="../../.gitbook/assets/image (73).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (146).png" alt=""><figcaption></figcaption></figure>
 
 原因：listen状态下，直接return了，所以后面无法更新abs\_ackno
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (74).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (147).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -118,13 +118,13 @@ syn ack的情况是空；fin ack的情况，就是窗口已经滑出了fin\_segm
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (75).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (148).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
 原因：fin没有统计进入abs\_ackno，虽然我的代码里明明有统计fin，但是判断是否fin的代码我放在了最后面，所以统计abs\_ackno的时候，fin\_sent还没来有更新。
 
-<figure><img src="../../.gitbook/assets/image (76).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (149).png" alt=""><figcaption></figcaption></figure>
 
 解决：将判断fin的代码移到最前面
 
@@ -134,7 +134,7 @@ syn ack的情况是空；fin ack的情况，就是窗口已经滑出了fin\_segm
 
 3.1
 
-<figure><img src="../../.gitbook/assets/image (77).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (150).png" alt=""><figcaption></figcaption></figure>
 
 原因：push进reassmbler后，abs\_ackno其实会发生变化，但是我们在ackno()里，没有拿到最新的abs\_ackno，所以错误。
 
@@ -146,7 +146,7 @@ syn ack的情况是空；fin ack的情况，就是窗口已经滑出了fin\_segm
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (78).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (151).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -156,7 +156,7 @@ syn ack的情况是空；fin ack的情况，就是窗口已经滑出了fin\_segm
 
 4.1&#x20;
 
-<figure><img src="../../.gitbook/assets/image (79).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (152).png" alt=""><figcaption></figcaption></figure>
 
 带fin的segment发出后，abs\_ackno错误，没有调试，初步判断应该是fin相关的代码有些问题，定位到问题。计算data\_segment的index时，应该使用之前的abs\_ackno，但是我现有的代码，因为将fin的代码移动到最前面，所以导致在此之前计算的abs\_ackno加入了fin\_sent，但是fin\_sent计入abs\_ackno，应该是在push\_substring之后，所以解决就是直接使用之前的abs\_ackno就行了，push前不要计算abs\_ackno。
 
@@ -164,7 +164,7 @@ syn ack的情况是空；fin ack的情况，就是窗口已经滑出了fin\_segm
 
 4.2&#x20;
 
-<figure><img src="../../.gitbook/assets/image (80).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (153).png" alt=""><figcaption></figcaption></figure>
 
 调试了一下，应该是index计算错误了
 
@@ -172,7 +172,7 @@ syn ack的情况是空；fin ack的情况，就是窗口已经滑出了fin\_segm
 
 4.3&#x20;
 
-<figure><img src="../../.gitbook/assets/image (81).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (154).png" alt=""><figcaption></figcaption></figure>
 
 求ackno的时候，很明显abs\_ackno错误，窗口更新了，但是abs\_ackno没有更新；
 
@@ -184,7 +184,7 @@ syn ack的情况是空；fin ack的情况，就是窗口已经滑出了fin\_segm
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (82).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (155).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -194,9 +194,9 @@ syn ack的情况是空；fin ack的情况，就是窗口已经滑出了fin\_segm
 
 (6) 非法的seqno
 
-<figure><img src="../../.gitbook/assets/image (83).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (156).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (84).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (157).png" alt=""><figcaption></figcaption></figure>
 
 一个比较特殊的case，这种情况下，非法，data不应发送；
 
@@ -210,7 +210,7 @@ syn ack的情况是空；fin ack的情况，就是窗口已经滑出了fin\_segm
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (85).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (158).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -218,6 +218,6 @@ syn ack的情况是空；fin ack的情况，就是窗口已经滑出了fin\_segm
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (86).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (159).png" alt=""><figcaption></figcaption></figure>
 
 </div>

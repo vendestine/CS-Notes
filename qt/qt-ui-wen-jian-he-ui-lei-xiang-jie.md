@@ -22,7 +22,7 @@ ui类不在项目的工作目录里，而是在编译文件目录里，ui\_mainw
 
 <div align="left">
 
-<figure><img src="../.gitbook/assets/image (17) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (90).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 

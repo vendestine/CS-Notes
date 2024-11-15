@@ -16,7 +16,7 @@ clangd的代码提示和补全，非常地强大，这里记录一下 vscode如�
 
 <div align="left">
 
-<figure><img src="../.gitbook/assets/image (111).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (184).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -24,13 +24,13 @@ clangd的代码提示和补全，非常地强大，这里记录一下 vscode如�
 
 (3) 如果isntall失败，那么我们手动install，[https://clangd.llvm.org/installation.html](https://clangd.llvm.org/installation.html)
 
-<figure><img src="../.gitbook/assets/image (115).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (188).png" alt=""><figcaption></figcaption></figure>
 
 由于我们是ubuntu，所以安装clangd-linux-18.1.3.zip
 
 <div align="left">
 
-<figure><img src="../.gitbook/assets/image (118).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (191).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -44,7 +44,7 @@ clangd的代码提示和补全，非常地强大，这里记录一下 vscode如�
 \
 vscode下，`ctrl + ,` 打开settings界面，然后输入proxy，打开settings.json (注意一定要选择正确的主机)，最后设置clangd.path
 
-<figure><img src="../.gitbook/assets/image (112).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (185).png" alt=""><figcaption></figcaption></figure>
 
 (4) 检查是否安装成功，vscode打开panel，然后输入clangd，check for language server update，如果已经安装会显示安装的版本。然后download language server，会提示发现installed clangd，直接set default，最后restart language server，reload window
 
@@ -52,6 +52,6 @@ vscode下，`ctrl + ,` 打开settings界面，然后输入proxy，打开settings
 
 <div align="left">
 
-<figure><img src="../.gitbook/assets/image (116).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (189).png" alt=""><figcaption></figcaption></figure>
 
 </div>

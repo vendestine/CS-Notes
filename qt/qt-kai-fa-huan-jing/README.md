@@ -8,7 +8,7 @@
 
 访问download.qt.io，然后选择archive，online\_installers，一般选择最新版本的installer，然后选择对应平台的installer安装文件；安装完成后，得到QT MainTenance Tool;
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (48).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -18,7 +18,7 @@
 
 打开Maintenance Tool后，登录，然后选择要安装的QT版本，以及需要的模块（一般要包含MinGW 32位编译器）；如果之后需要安装/卸载 其余的模块，也是使用QT Maintenance Tool管理；
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (49).png" alt=""><figcaption></figcaption></figure>
 
 使用QT的时候，一般选择MINGW32/MINGW64位编译器，一般不建议使用VC++编译器；
 

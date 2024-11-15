@@ -10,7 +10,7 @@
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (47).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (120).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -18,7 +18,7 @@
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (48).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (121).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -26,11 +26,11 @@
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (49).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (122).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
-<figure><img src="../../.gitbook/assets/image (50).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (123).png" alt=""><figcaption></figcaption></figure>
 
 1.4 远程仓库和官方的仓库一致了，每做一个lab就merge远程分支的lab-starter分支到本地分支上，然后最后本地的master分支push到远程仓库的master分支下。
 
@@ -62,7 +62,7 @@ make format一直报错，这一块debug了一会，具体看debug1
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (36).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -105,7 +105,7 @@ void get_URL(const string &host, const string &path) {
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (51).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (124).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -121,7 +121,7 @@ eof expectation老是出错，看一下这个test，其实就很明显了；读b
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (54).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (127).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -135,7 +135,7 @@ write "cat"进capacity = 2的buffer出错
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (53).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (126).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -143,7 +143,7 @@ write "cat"进capacity = 2的buffer出错
 
 lab0 pass 100%
 
-<figure><img src="../../.gitbook/assets/image (55).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (128).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -313,7 +313,7 @@ clang-format --version    # 查看clang-format版本，验证是否安装成功
 
 安装后仍然make format失败，cmake工程的配置文件有问题，打开sponge/etc/clang\_format.cmake修改配置文件
 
-<figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (110).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -330,7 +330,7 @@ sock.write("GET " + path + "HTTP/1.1\r\n");
 sock.write("GET " + path + " HTTP/1.1 \r\n");
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (35).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (34).png" alt=""><figcaption></figcaption></figure>
 

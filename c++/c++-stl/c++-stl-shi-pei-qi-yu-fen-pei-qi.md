@@ -19,7 +19,7 @@ STL 的适配器有哪些：
 1. 要使用stack，需要#include \<stack>
 2. 要使用queue或priority\_queue， 需要#include\<queue>
 
-<figure><img src="../../.gitbook/assets/image (27).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (100).png" alt=""><figcaption></figcaption></figure>
 
 分配器：
 

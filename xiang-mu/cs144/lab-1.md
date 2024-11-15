@@ -8,7 +8,7 @@
 
 lab1 主要是继续封装我们lab0实现过的bytestream对象，我们的byte\_stream对象，目前可以接收segment，但是接收到的segment有可能是乱序的，或者重叠的，所以我们在byte\_stream的上层继续添加重组的功能，封装成一个重组器。
 
-<figure><img src="../../.gitbook/assets/image (67).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (140).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -16,7 +16,7 @@ lab1 主要是继续封装我们lab0实现过的bytestream对象，我们的byte
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (69).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (142).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -40,7 +40,7 @@ push\_substring的功能：数据在窗口中的进行截断，放入窗口里�
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (70).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (143).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -56,7 +56,7 @@ push\_substring的功能：数据在窗口中的进行截断，放入窗口里�
 
 关闭优化！
 
-<figure><img src="../../.gitbook/assets/image (65).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (138).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -70,9 +70,9 @@ byte\_stream读出eof依赖两个条件，一个是buffer\_size为空，满足�
 
 那么reassembler什么时候设置 \_end\_input信号呢，window为空，并且segment的eof出现过，自然就不再往byte\_stream里写入。
 
-<figure><img src="../../.gitbook/assets/image (57).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (130).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (59).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (132).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -84,13 +84,13 @@ byte\_stream读出eof依赖两个条件，一个是buffer\_size为空，满足�
 
 解决：在原来的条件基础上，再加上出现过eof的segment的最后一个字符，也已经被窗口接受过。
 
-<figure><img src="../../.gitbook/assets/image (60).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (133).png" alt=""><figcaption></figcaption></figure>
 
 
 
 (3) holes测试文件出错
 
-<figure><img src="../../.gitbook/assets/image (61).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (134).png" alt=""><figcaption></figcaption></figure>
 
 问题出在这，我们希望应该是 window\[0] = c, window\[1] = d，但是确实下面的结果
 
@@ -100,7 +100,7 @@ byte\_stream读出eof依赖两个条件，一个是buffer\_size为空，满足�
 
 解决：直接将窗口前面的字符pop出去，模拟滑动，这样d在新窗口中的第二位了。
 
-<figure><img src="../../.gitbook/assets/image (62).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (135).png" alt=""><figcaption></figcaption></figure>
 
 修改成pop后，引发新的问题，原来是遍历窗口前面的元素，然后置\0；
 
@@ -108,7 +108,7 @@ byte\_stream读出eof依赖两个条件，一个是buffer\_size为空，满足�
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (63).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (136).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -118,7 +118,7 @@ byte\_stream读出eof依赖两个条件，一个是buffer\_size为空，满足�
 
 (4) 空字符串的问题
 
-<figure><img src="../../.gitbook/assets/image (64).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (137).png" alt=""><figcaption></figcaption></figure>
 
 现有的代码，我们无法判断该位置是放入了空字符，还是没有放入过字符，所以我们需要额外的操作区判断，可以使用一个同步的bitmap，表示窗口的某位置是否放入字符。
 
@@ -126,6 +126,6 @@ byte\_stream读出eof依赖两个条件，一个是buffer\_size为空，满足�
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (71).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (144).png" alt=""><figcaption></figcaption></figure>
 
 </div>

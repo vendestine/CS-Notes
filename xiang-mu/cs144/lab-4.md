@@ -30,7 +30,7 @@
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (89).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (162).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -38,15 +38,15 @@
 
 (1) active\_close出错
 
-<figure><img src="../../.gitbook/assets/image (90).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (163).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (92).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (165).png" alt=""><figcaption></figcaption></figure>
 
 
 
 打开测试文件，断点查看，这个test出错了
 
-<figure><img src="../../.gitbook/assets/image (93).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (166).png" alt=""><figcaption></figcaption></figure>
 
 之前的test，一般test代码的每一个excute只会封装一个action或者一个expectation；但是lab4的这些此时代码里，因为涉及到状态，所以一个excute里面会封装很多action和expectation，所以我们不必太去深究每一个excute里封装了些什么，只要看哪一步错了就行。
 
@@ -54,7 +54,7 @@
 
 in\_closing封装了很多action和expectation，是为了让当前的peer达到closing状态。 &#x20;
 
-<figure><img src="../../.gitbook/assets/image (94).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (167).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -68,7 +68,7 @@ debug之后，发现是因为tick后，\_time\_since\_last\_segment\_received �
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (95).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (168).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -76,9 +76,9 @@ debug之后，发现是因为tick后，\_time\_since\_last\_segment\_received �
 
 (2) winsize出错
 
-<figure><img src="../../.gitbook/assets/image (96).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (169).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (97).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (170).png" alt=""><figcaption></figcaption></figure>
 
 调试了一下，发现当前的peer在收到ack空包后，没有继续fill\_window。检查了一下代码逻辑，我们是seg.length\_in\_sequence\_space() > 0时，才fill\_window，但是ack空包后不再这个范围里，所以我们没有继续fill\_window。
 
@@ -86,7 +86,7 @@ debug之后，发现是因为tick后，\_time\_since\_last\_segment\_received �
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (98).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (171).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -94,7 +94,7 @@ debug之后，发现是因为tick后，\_time\_since\_last\_segment\_received �
 
 (3) ack\_rst出错
 
-<figure><img src="../../.gitbook/assets/image (99).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (172).png" alt=""><figcaption></figcaption></figure>
 
 改完winsize后，ack\_rst突然就出错了，研究一下。
 
@@ -106,11 +106,11 @@ debug之后，发现是因为tick后，\_time\_since\_last\_segment\_received �
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (103).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (176).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
-<figure><img src="../../.gitbook/assets/image (105).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (178).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -118,7 +118,7 @@ debug之后，发现是因为tick后，\_time\_since\_last\_segment\_received �
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (102).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (175).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -130,7 +130,7 @@ test 104 - 151 failed or timeout
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (106).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (179).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -146,13 +146,13 @@ test 104 - 151 failed or timeout
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -166,12 +166,6 @@ adress.c文件里，加入#include \<array>
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
-
-</div>
-
-<div align="left">
-
 <figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
 </div>
@@ -179,6 +173,12 @@ adress.c文件里，加入#include \<array>
 <div align="left">
 
 <figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+
+</div>
+
+<div align="left">
+
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 

@@ -4,7 +4,7 @@
 
 根据一个最基本的QT application项目，看看QT项目的目录结构
 
-<figure><img src="../.gitbook/assets/image (18) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (91).png" alt=""><figcaption></figcaption></figure>
 
 QT项目里一般有这几部分文件
 
@@ -28,11 +28,11 @@ QT creator自动生成的 .pro文件 和 在命令行使用qmake -project命令�
 
 QT Creator自动生成的 .pro文件：
 
-<figure><img src="../.gitbook/assets/image (19) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (92).png" alt=""><figcaption></figcaption></figure>
 
 qmake -project命令生成的 .pro文件
 
-<figure><img src="../.gitbook/assets/image (16) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (89).png" alt=""><figcaption></figcaption></figure>
 
 根据这两个文件的内容，解释一下.pro文件的信息
 
@@ -97,9 +97,9 @@ mingw32-make：make找到Makefile文件去编译程序；在windows上，由于�
 
 qmake和mingw32-make在QT中的位置：
 
-<figure><img src="../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (93).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (86).png" alt=""><figcaption></figcaption></figure>
 
 
 

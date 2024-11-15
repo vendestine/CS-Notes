@@ -20,13 +20,13 @@
 
 <div align="left">
 
-<figure><img src="../.gitbook/assets/image (5) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>声明槽函数</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (79).png" alt=""><figcaption><p>声明槽函数</p></figcaption></figure>
 
 </div>
 
 <div align="left">
 
-<figure><picture><source srcset="../.gitbook/assets/image (11) (1).png" media="(prefers-color-scheme: dark)"><img src="../.gitbook/assets/image (11) (1).png" alt=""></picture><figcaption><p>实现槽（函数）</p></figcaption></figure>
+<figure><picture><source srcset="../.gitbook/assets/image (74).png" media="(prefers-color-scheme: dark)"><img src="../.gitbook/assets/image (74).png" alt=""></picture><figcaption><p>实现槽（函数）</p></figcaption></figure>
 
 </div>
 
@@ -38,7 +38,7 @@ Qt5使用函数指针：clickedButton\_2
 
 <div align="left">
 
-<figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>QT4/QT5 connect不同写法</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (76).png" alt=""><figcaption><p>QT4/QT5 connect不同写法</p></figcaption></figure>
 
 </div>
 
@@ -50,7 +50,7 @@ connect to C++11 lambda：clickedButton\_3
 
 <div align="left">
 
-<figure><img src="../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Lambda表达式作为槽</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (78).png" alt=""><figcaption><p>Lambda表达式作为槽</p></figcaption></figure>
 
 </div>
 
@@ -64,13 +64,13 @@ connect to C++11 lambda：clickedButton\_3
 
 信号和槽的本质：<mark style="background-color:orange;">信号和槽的本质都是函数</mark>，我们可以使用QT预定义的信号函数和槽函数，也可也<mark style="background-color:orange;">自定义信号函数和槽函数</mark>；信号是公共访问的函数，在头文件中的signals关键字后声明，实现是由moc自动实现；而槽是成员函数，在头文件中的slots关键字后声明，需要自己实现，有类的访问限制；
 
-<figure><img src="../.gitbook/assets/image (7) (1) (1) (1) (1).png" alt=""><figcaption><p>signals官方解释</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (81).png" alt=""><figcaption><p>signals官方解释</p></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (6) (1) (1) (1) (1).png" alt=""><figcaption><p>slots官方解释</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (80).png" alt=""><figcaption><p>slots官方解释</p></figcaption></figure>
 
 这里转载一张思维导图，对于QT信号和槽总结的还是挺全面的
 
-<figure><img src="../.gitbook/assets/image (8) (1) (1) (1).png" alt=""><figcaption><p><a href="https://blog.csdn.net/sazass/article/details/104903353">https://blog.csdn.net/sazass/article/details/104903353</a></p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (82).png" alt=""><figcaption><p><a href="https://blog.csdn.net/sazass/article/details/104903353">https://blog.csdn.net/sazass/article/details/104903353</a></p></figcaption></figure>
 
 
 

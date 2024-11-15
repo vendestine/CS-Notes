@@ -24,7 +24,7 @@
 
 子线程函数传参：值传递是传原对象的拷贝，引用传递是传原对象的（拷贝/复制构造后）临时对象的地址，指针传递是传原对象的地址；
 
-<figure><img src="../../.gitbook/assets/image (32).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (105).png" alt=""><figcaption></figcaption></figure>
 
 相关代码：普通函数传参，子线程函数传参
 
@@ -142,13 +142,13 @@ int main()
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (42).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (41).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -158,7 +158,7 @@ int main()
 
 这里想在子线程函数里通过引用直接修改原对象报错了！
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (43).png" alt=""><figcaption></figcaption></figure>
 
 相关代码：使用std::ref
 

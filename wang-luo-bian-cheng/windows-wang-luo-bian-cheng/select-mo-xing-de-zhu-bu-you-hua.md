@@ -6,7 +6,7 @@
 
 (1) C++封装：服务端封装一个Server类，客户端封装一个Client类
 
-<figure><img src="../../.gitbook/assets/image (29).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (102).png" alt=""><figcaption></figcaption></figure>
 
 
 
