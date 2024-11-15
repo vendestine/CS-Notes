@@ -1,10 +1,18 @@
 # GitBook
 
-## gitbook搭建博客
+## gitbook的summary.md和README.md
+
+gitbook渲染到web page，主要就是通过所有的md文件 + summary.md + README.md\
+其中README.md是gitbook的简介，而summary.md是gitbook的目录
+
+gitbook的编辑方式：
+
+(1) gitbook web端编辑：如果是采用gitbook web端编辑，那么会自动将第一个page的内容作为README.md，然后自动根据现有的page结构，生成目录写入summary.md里\
+(2) github仓库编辑：如果是直接在仓库边界，那么我们为了让仓库的md文件渲染到web page上，我们需要手动编辑summary.md文件，也就是说要自己手动组织目录结构。
+
+
 
 ## gitbook page 和 github markdown
-
-### page和markdown的转化
 
 (1) markdown -> page
 
@@ -42,11 +50,13 @@ github仓库，自己手动编辑后，gitbook web端的page会自动pull仓库�
 
 通过上述的实验，我们清楚了gitbook和github同步的本质
 
-无论是在gitbook编辑，还是在github仓库编辑，实际都是把更新的内容add到索引里，然后再提交到commit，最后push到github仓库中。github仓库中，肯定是最新的commit，而gitbook web端会自动检测是否有新的commit，如果有就进行update，同步成最新的commit。
+无论是在gitbook编辑，还是在github仓库编辑，实际都是把更新的内容add到索引里，然后再提交到commit，最后push到github仓库中。github仓库中，肯定是最新的commit，而gitbook web端会自动检测是否有新的commit，如果有就进行update，同步成最新的commit。<mark style="background-color:orange;">所以同步源其实就是github仓库</mark>
 
 
 
-那既然如此，为什么有给出了两种同步方式，这里的同步其实是说gitbook和github建立connection后，第一次同步的方式，因为按照上述机制，有可能存在初始情况github仓库为空，但是gitbook里有内容，这个时候为了让gitbook的内容同步到github上，就必须选择gitbook -> github，第一次同步后，之后随意更改同步模式，都可以自动同步
+那既然如此，为什么有给出了两种同步方式，这里的同步其实是说gitbook和github建立connection后，第一次同步的方式，因为建立connection的时候，要么是gitbook为空，github仓库有内容；要么是gitbook有内容，github仓库为空。
+
+按照上述机制，如果初始情况是 gitbook有内容，github仓库为空，这个时候作为同步源的github仓库是空的，所以此时必须选择gitbook -> github，将gitbook的内容同步到github仓库中。之后可以随意切换同步模式，因为github仓库不为空了，它可以作为同步源，gitbook和github仓库都是自动同步。
 
 
 
