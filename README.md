@@ -1,17 +1,3 @@
----
-layout:
-  title:
-    visible: true
-  description:
-    visible: true
-  tableOfContents:
-    visible: false
-  outline:
-    visible: false
-  pagination:
-    visible: true
----
-
 # 博客导航
 
 <figure><img src=".gitbook/assets/744bc337ly1ht78rmmlr3j24mo2lr1kx.jpg" alt=""><figcaption></figcaption></figure>
