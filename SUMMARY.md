@@ -85,7 +85,6 @@
     * [虚函数表和虚函数表指针的创建时机](c++/c++-mian-shi-ti/xu-han-shu-biao-he-xu-han-shu-biao-zhi-zhen-de-chuang-jian-shi-ji.md)
     * [虚析构函数的作用](c++/c++-mian-shi-ti/xu-xi-gou-han-shu-de-zuo-yong.md)
     * [智能指针种类以及使用场景](c++/c++-mian-shi-ti/zhi-neng-zhi-zhen-zhong-lei-yi-ji-shi-yong-chang-jing.md)
-    * [Page](c++/c++-mian-shi-ti/page.md)
 * [QT](qt/README.md)
   * [QT开发环境](qt/qt-kai-fa-huan-jing/README.md)
     * [QT Creator](qt/qt-kai-fa-huan-jing/qt-creator.md)
